@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/quem-somos", "destination": "/quem-somos.html" },
+    { "source": "/o-que-oferecemos", "destination": "/o-que-oferecemos.html" }
+  ]
+}
