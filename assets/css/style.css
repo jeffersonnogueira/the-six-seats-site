@@ -34,7 +34,7 @@ h3{ font-size: 18px; }
 
 /* ===== Top utility bar (like Schwab) ===== */
 .top-utility{
-  background: #0b1220;
+  background: #0B2E6B; /* Royal Blue */
   color: rgba(255,255,255,.86);
   border-bottom: 1px solid rgba(255,255,255,.10);
 }
@@ -231,6 +231,7 @@ h3{ font-size: 18px; }
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position: 75% 50%; /* foca mais na pessoa (direita) */
   filter: saturate(1.05) contrast(1.02);
 }
 .hero-right::after{
