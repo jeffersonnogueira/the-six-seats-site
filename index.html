@@ -3,149 +3,131 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Six Seats Investments — Clareza, Disciplina e Gestão de Risco</title>
-  <meta name="description" content="Uma abordagem premium e orientada a risco para decisões financeiras: educação, processos e ferramentas. Sem promessas — foco em método." />
-  <meta name="theme-color" content="#0b1020" />
-
-  <meta property="og:title" content="The Six Seats Investments" />
-  <meta property="og:description" content="Clareza, disciplina e gestão de risco — método antes de emoção." />
-  <meta property="og:type" content="website" />
-
+  <title>The Six Seats Investments — Clareza e método</title>
+  <meta name="description" content="Estrutura, processo e disciplina: decisões com foco em risco, consistência e execução." />
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
-  <header class="topbar">
+
+  <!-- Top utility like Schwab -->
+  <div class="top-utility">
     <div class="container">
-      <nav class="nav" aria-label="Navegação principal">
-        <a class="brand" href="/" aria-label="Ir para a Home">
-          <div class="logo" aria-hidden="true"></div>
+      <div class="utility-row">
+        <div class="utility-links">
+          <a href="/quem-somos" data-nav>Quem somos</a>
+          <a href="/o-que-oferecemos" data-nav>O que oferecemos</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <div class="utility-right">
+          <span class="utility-pill">Atendimento Premium</span>
+          <a class="utility-pill" href="#contato">Falar conosco</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main header -->
+  <header class="header">
+    <div class="container">
+      <div class="navbar">
+        <a class="brand" href="/" aria-label="Home">
+          <div class="logo"></div>
           <div class="brand-title">
             <strong>The Six Seats</strong>
             <span>Investments • método e risco</span>
           </div>
         </a>
 
-        <div class="links" role="navigation">
-          <a data-nav href="/" class="">Home</a>
+        <nav class="nav-links" aria-label="Menu">
+          <a data-nav href="/">Home</a>
           <a data-nav href="/quem-somos">Quem somos</a>
           <a data-nav href="/o-que-oferecemos">O que oferecemos</a>
-        </div>
+        </nav>
 
-        <div class="cta">
+        <div class="actions">
           <a class="btn ghost" href="/o-que-oferecemos#como-funciona">Como funciona</a>
-          <a class="btn primary" href="#contato">Falar conosco</a>
+          <a class="btn orange" href="#contato">Falar conosco</a>
         </div>
 
-        <button class="mobile-toggle" data-mobile-toggle aria-label="Abrir menu">
-          ☰
-        </button>
-      </nav>
+        <button class="mobile-toggle" data-mobile-toggle aria-label="Abrir menu">☰</button>
+      </div>
 
       <div class="mobile-menu" data-mobile-menu>
         <a data-nav href="/">Home</a>
         <a data-nav href="/quem-somos">Quem somos</a>
         <a data-nav href="/o-que-oferecemos">O que oferecemos</a>
-        <a href="#contato">Falar conosco</a>
+        <a href="#contato">Contato</a>
       </div>
     </div>
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card">
-            <div class="hero-main">
+        <div class="hero-shell">
+          <div class="hero-grid">
+            <div class="hero-left">
               <div class="kicker">
-                <span class="tag">Premium • Simples • Direto</span>
-                <span class="badge"><i></i> Foco em método</span>
-              </div>
-              <h1>Clareza, disciplina e gestão de risco — antes de qualquer decisão.</h1>
-              <p class="subhead">
-                Construímos estrutura para você operar com consistência: processo, critérios, métricas e hábitos.
-                Sem promessas e sem “atalhos” — apenas um sistema que ajuda a reduzir ruído e aumentar controle.
-              </p>
-
-              <div class="hero-actions">
-                <a class="btn primary" href="/o-que-oferecemos">Ver o que oferecemos</a>
-                <a class="btn" href="/quem-somos">Conhecer a filosofia</a>
+                <span class="tag blue">Clareza</span>
+                <span class="tag orange">Disciplina</span>
+                <span class="tag">Gestão de risco</span>
               </div>
 
-              <div class="hr"></div>
-              <p class="small-note">
-                Nota: este site apresenta conteúdo educacional e estrutura de processo. Não é recomendação individual de investimento.
+              <h1>O poder da escolha — com método.</h1>
+              <p class="lead">
+                Da organização do seu processo à execução disciplinada: ajudamos você a reduzir ruído,
+                melhorar decisões e operar com consistência — sem promessas, apenas estrutura.
               </p>
+
+              <div class="hero-cta">
+                <a class="btn orange" href="#contato">Agendar conversa</a>
+                <a class="btn blue" href="/o-que-oferecemos">Ver o que oferecemos</a>
+              </div>
+
+              <div class="disclaimer">
+                Conteúdo educacional e estrutura de processo. Não é recomendação individual de investimento.
+              </div>
+            </div>
+
+            <div class="hero-right">
+              <!-- sua imagem vai aqui -->
+              <img class="hero-photo" src="/assets/img/hero.jpg" alt="Imagem de fundo (substituir pela sua)" />
             </div>
           </div>
-
-          <aside class="hero-card hero-side">
-            <div class="metric">
-              <strong>1) Processo</strong>
-              <span>Entrada, risco, saída e revisão — com checklist e critérios.</span>
-            </div>
-            <div class="metric">
-              <strong>2) Gestão de risco</strong>
-              <span>Risco por decisão, cenários e disciplina operacional.</span>
-            </div>
-            <div class="metric">
-              <strong>3) Clareza</strong>
-              <span>Menos emoção, mais consistência: foco no que é repetível.</span>
-            </div>
-            <div class="metric">
-              <strong>4) Evolução</strong>
-              <span>Rotina de melhoria contínua baseada em registros e métricas.</span>
-            </div>
-          </aside>
         </div>
       </div>
     </section>
 
+    <!-- Market strip (igual Schwab, opcional) -->
+    <div class="market-strip" aria-label="Indicadores (exemplo)">
+      <div class="container">
+        <div class="strip-row">
+          <div class="strip-item"><b>Disciplina</b> <span>Processo acima de emoção</span></div>
+          <div class="strip-item"><b>Risco</b> <span>Limites e cenários</span></div>
+          <div class="strip-item"><b>Rotina</b> <span>Execução repetível</span></div>
+          <div class="strip-item"><b>Revisão</b> <span>Melhoria contínua</span></div>
+        </div>
+      </div>
+    </div>
+
     <section class="section">
       <div class="container">
-        <h2>O que você ganha na prática</h2>
-        <p>Um caminho profissional para organizar decisões — com linguagem simples e execução objetiva.</p>
+        <h2 class="section-title">O que você ganha na prática</h2>
+        <p>Um caminho corporativo, direto e repetível para tomar decisões melhores.</p>
 
         <div class="grid-3">
           <div class="card">
-            <div class="icon" aria-hidden="true"></div>
             <h3>Framework de decisão</h3>
-            <p>Critérios claros para agir (ou não agir), evitando impulsos e “FOMO”.</p>
+            <p>Critérios claros para agir (ou não agir), evitando impulsos.</p>
           </div>
           <div class="card">
-            <div class="icon" aria-hidden="true"></div>
             <h3>Rotina e disciplina</h3>
-            <p>Uma rotina enxuta para preparação, execução e revisão — sem complicação.</p>
+            <p>Preparação, execução e revisão — com estrutura simples.</p>
           </div>
           <div class="card">
-            <div class="icon" aria-hidden="true"></div>
             <h3>Controle de risco</h3>
-            <p>Definições objetivas de risco por decisão e limites para proteger capital.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="split">
-          <div class="card">
-            <h2>Princípios</h2>
-            <ul class="list">
-              <li><strong>Método acima de opinião</strong>: decisões seguem critérios.</li>
-              <li><strong>Risco primeiro</strong>: proteja o downside para sobreviver ao jogo.</li>
-              <li><strong>Consistência > intensidade</strong>: repetição vence “hero trade”.</li>
-              <li><strong>Registro e revisão</strong>: medir para ajustar, ajustar para evoluir.</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h2>Para quem é</h2>
-            <ul class="list">
-              <li>Quem quer sair do “achismo” e operar com processo.</li>
-              <li>Quem quer organizar rotina e reduzir ansiedade na execução.</li>
-              <li>Quem valoriza clareza, disciplina e um estilo premium/clean.</li>
-              <li>Quem quer aprender a pensar risco antes de retorno.</li>
-            </ul>
+            <p>Risco por decisão, limites e proteção de capital.</p>
           </div>
         </div>
       </div>
@@ -155,57 +137,36 @@
       <div class="container">
         <div class="card">
           <h2>Contato</h2>
-          <p>
-            Quer conversar sobre seu objetivo e entender o melhor caminho (educação, processo, ferramentas)?
-            Envie uma mensagem.
-          </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="mailto:contato@SEU_DOMINIO.com?subject=Contato%20-%20The%20Six%20Seats%20Investments">Enviar e-mail</a>
-            <a class="btn" href="/o-que-oferecemos#pacotes">Ver opções</a>
+          <p>Quer transformar isso em um processo real na sua rotina? Vamos conversar.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+            <a class="btn orange" href="mailto:contato@SEU_DOMINIO.com?subject=Contato%20-%20The%20Six%20Seats">Enviar e-mail</a>
+            <a class="btn blue" href="/o-que-oferecemos#pacotes">Ver pacotes</a>
           </div>
-          <p class="small-note">Dica: depois você troca o e-mail acima para o seu (ex.: contato@thesixseatsinvestments.com).</p>
-        </div>
-
-        <div class="section faq">
-          <h2>Perguntas rápidas</h2>
-
-          <details>
-            <summary>Vocês prometem retorno?</summary>
-            <p>Não. O foco é processo, disciplina e risco. Mercado envolve incerteza — a meta é melhorar decisão e execução.</p>
-          </details>
-
-          <details>
-            <summary>É consultoria de investimento?</summary>
-            <p>Este site é educacional. Se você precisa de recomendação personalizada, procure um profissional licenciado na sua jurisdição.</p>
-          </details>
-
-          <details>
-            <summary>Como começo?</summary>
-            <p>Comece pela página “O que oferecemos” e escolha o nível (base, templates, acompanhamento de processo).</p>
-          </details>
+          <p style="margin-top:10px; font-size:12px; color:#64748b;">Troque o e-mail para o seu domínio real.</p>
         </div>
       </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="mini">
-          <div class="logo" aria-hidden="true" style="width:32px;height:32px;border-radius:12px;"></div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
           <div>
-            <div><strong>The Six Seats Investments</strong></div>
-            <div style="color:var(--muted); font-size:12px;">Clareza • Disciplina • Risco</div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <div class="logo" style="width:32px;height:32px;border-radius:10px;"></div>
+              <div>
+                <strong>The Six Seats Investments</strong><br>
+                <span style="color:#64748b; font-size:12px;">Clareza • Disciplina • Risco</span>
+              </div>
+            </div>
+          </div>
+          <div class="fine">
+            <strong>Disclaimer:</strong> Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal,
+            nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros.
           </div>
         </div>
-
-        <div class="fine" style="max-width: 68ch;">
-          <strong>Disclaimer:</strong> Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal,
-          nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros.
-        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script src="/assets/js/main.js"></script>
 </body>

@@ -1,39 +1,28 @@
 (function(){
-  const mobileBtn = document.querySelector('[data-mobile-toggle]');
-  const mobileMenu = document.querySelector('[data-mobile-menu]');
+  const btn = document.querySelector('[data-mobile-toggle]');
+  const menu = document.querySelector('[data-mobile-menu]');
 
-  if (mobileBtn && mobileMenu){
-    mobileBtn.addEventListener('click', () => {
-      const isOpen = mobileMenu.getAttribute('data-open') === '1';
-      mobileMenu.setAttribute('data-open', isOpen ? '0' : '1');
-      mobileMenu.style.display = isOpen ? 'none' : 'block';
-      mobileBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+  if(btn && menu){
+    menu.style.display = 'none';
+    btn.addEventListener('click', () => {
+      const open = menu.getAttribute('data-open') === '1';
+      menu.setAttribute('data-open', open ? '0' : '1');
+      menu.style.display = open ? 'none' : 'block';
     });
-
-    // start closed
-    mobileMenu.style.display = 'none';
-    mobileMenu.setAttribute('data-open','0');
-    mobileBtn.setAttribute('aria-expanded','false');
   }
 
-  // Active link highlight based on path
-  const path = (location.pathname || "/").split("/").pop() || "index.html";
-  const key = path.toLowerCase();
+  // active nav highlight
+  const path = (location.pathname || "/").toLowerCase();
+  document.querySelectorAll('a[data-nav]').forEach(a => {
+    const href = (a.getAttribute('href') || "").toLowerCase();
+    if(!href) return;
 
-  const markActive = (selector) => {
-    document.querySelectorAll(selector).forEach(a => {
-      const href = (a.getAttribute('href') || "").toLowerCase();
-      if (!href) return;
+    // handle clean urls and html
+    const normalizedHref = href.replace(".html","");
+    const normalizedPath = path.replace(".html","");
 
-      // allow clean urls too
-      const clean = href.replace(".html","");
-      const currentClean = key.replace(".html","");
-
-      if (href.includes(key) || clean === `/${currentClean}` || clean === currentClean){
-        a.classList.add('active');
-      }
-    });
-  };
-
-  markActive('a[data-nav]');
+    if(normalizedHref === normalizedPath || normalizedHref === "/" && normalizedPath === "/"){
+      a.classList.add("active");
+    }
+  });
 })();
