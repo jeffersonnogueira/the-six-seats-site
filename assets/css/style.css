@@ -31,8 +31,8 @@ h2{ font-size: clamp(22px, 2.6vw, 34px); }
 h3{ font-size: 18px; }
 
 :root{
-  --gutter: clamp(24px, 4vw, 96px); /* 96px ≈ 1 inch */
-  --container-max: 1280px;
+  --container-max: 1180px;                 /* mais “corporate”, não estica infinito */
+  --gutter: clamp(20px, 3vw, 72px);        /* margem automática */
 }
 
 .container{
@@ -41,6 +41,7 @@ h3{ font-size: 18px; }
   padding-left: var(--gutter);
   padding-right: var(--gutter);
 }
+
 
 
 /* ===== Top utility bar (like Schwab) ===== */
@@ -363,7 +364,7 @@ h3{ font-size: 18px; }
 .hero-full{
   position: relative;
   width: 100%;
-  min-height: 520px;
+  min-height: clamp(420px, 52vh, 620px); /* responde à tela */
   overflow: hidden;
   background: #fff;
 }
@@ -374,8 +375,9 @@ h3{ font-size: 18px; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 45%;
+  object-position: 70% 40%; /* ajuste fino se precisar */
 }
+
 
 /* camada de leitura (clareia o lado esquerdo como o Schwab) */
 .hero-full::after{
@@ -400,17 +402,20 @@ h3{ font-size: 18px; }
 }
 
 .hero-panel{
-  max-width: 520px;
+  max-width: 560px;
 }
 
 .hero-panel h1{
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-size: clamp(40px, 4.2vw, 64px); /* cresce com tela, mas tem limite */
+  line-height: 1.03;
 }
 
 .hero-panel .lead{
-  max-width: 52ch;
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.6;
+  max-width: 56ch;
 }
+
 
 @media (max-width: 920px){
   .hero-full{ min-height: 520px; }
