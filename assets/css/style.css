@@ -167,19 +167,19 @@ h3{ font-size: 18px; }
 
 /* ===== Hero ===== */
 .hero{
-  padding: 26px 0 6px;
+  padding: 0;
 }
 .hero-shell{
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: calc(var(--radius) + 8px);
-  box-shadow: var(--shadow);
-  overflow:hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
 }
 .hero-grid{
-  display:grid;
-  grid-template-columns: 1.05fr .95fr;
-  min-height: 420px;
+  position: relative;
+  min-height: 520px;
+  display: block;
 }
 .hero-left{
   padding: 34px 30px;
@@ -348,3 +348,73 @@ h3{ font-size: 18px; }
   background: rgba(11,116,209,.10);
   border-color: rgba(11,116,209,.25);
 }
+/* ===== Schwab-like FULL-BLEED hero ===== */
+.hero-full{
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.hero-full img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 45%;
+}
+
+/* camada de leitura (clareia o lado esquerdo como o Schwab) */
+.hero-full::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.96) 0%,
+      rgba(255,255,255,.88) 28%,
+      rgba(255,255,255,.55) 48%,
+      rgba(255,255,255,.15) 66%,
+      rgba(255,255,255,0) 78%
+    );
+}
+
+/* bloco de texto por cima */
+.hero-overlay{
+  position: relative;
+  z-index: 2;
+  padding: 56px 0 56px;
+}
+
+.hero-panel{
+  max-width: 520px;
+}
+
+.hero-panel h1{
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.hero-panel .lead{
+  max-width: 52ch;
+}
+
+@media (max-width: 920px){
+  .hero-full{ min-height: 520px; }
+  .hero-full::after{
+    background: linear-gradient(180deg,
+      rgba(255,255,255,.96) 0%,
+      rgba(255,255,255,.88) 35%,
+      rgba(255,255,255,.30) 70%,
+      rgba(255,255,255,0) 100%
+    );
+  }
+  .hero-overlay{ padding: 36px 0; }
+  .hero-panel{ max-width: 640px; }
+}
+.hero-full{
+  border-bottom: 1px solid var(--border);
+}
+
