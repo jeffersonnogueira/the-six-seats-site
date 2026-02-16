@@ -364,7 +364,7 @@ h3{ font-size: 18px; }
 .hero-full{
   position: relative;
   width: 100%;
-  min-height: clamp(420px, 52vh, 620px); /* responde à tela */
+  min-height: clamp(420px, 62vh, 780px); /* responde à tela */
   overflow: hidden;
   background: #fff;
 }
@@ -375,7 +375,7 @@ h3{ font-size: 18px; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 40%; /* ajuste fino se precisar */
+  object-position: 70% 55%; /* ajuste fino se precisar */
 }
 
 
@@ -418,7 +418,7 @@ h3{ font-size: 18px; }
 
 
 @media (max-width: 920px){
-  .hero-full{ min-height: 520px; }
+  .hero-full{ min-height: 600px; }
   .hero-full::after{
     background: linear-gradient(180deg,
       rgba(255,255,255,.96) 0%,
