@@ -238,20 +238,13 @@ h3{ font-size: 18px; }
   background: #eef2f6;
 }
 .hero-photo{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position: 75% 50%; /* foca mais na pessoa (direita) */
-  filter: saturate(1.05) contrast(1.02);
+  object-fit: cover;
+  object-position: 60% 55%;
+  filter: none; /* deixa a foto “como é” */
 }
-.hero-right::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(90deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.10) 55%, rgba(255,255,255,0) 75%);
-}
+
+.hero-right::after{ display:none; }
+
 
 /* ===== Sections ===== */
 .section{ padding: 26px 0; }
@@ -364,10 +357,14 @@ h3{ font-size: 18px; }
 .hero-full{
   position: relative;
   width: 100%;
-  min-height: clamp(420px, 62vh, 780px); /* responde à tela */
+  min-height: clamp(560px, 78vh, 900px); /* mostra mais foto */
   overflow: hidden;
-  background: #fff;
 }
+.hero-full img{
+  object-fit: cover;
+  object-position: 60% 55%; /* mexe aqui até ficar perfeito */
+}
+
 /* fundo preenchendo a tela (sem barras) */
 .hero-full::before{
   content:"";
