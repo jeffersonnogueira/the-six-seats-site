@@ -353,99 +353,66 @@ h3{ font-size: 18px; }
   background: rgba(11,116,209,.10);
   border-color: rgba(11,116,209,.25);
 }
-/* ===== Schwab-like FULL-BLEED hero ===== */
+/* ===== Schwab-like FULL-BLEED hero (SEM FADE / SEM BARRAS) ===== */
 .hero-full{
   position: relative;
   width: 100%;
-  min-height: clamp(560px, 78vh, 900px); /* mostra mais foto */
+  min-height: clamp(620px, 82vh, 980px); /* mostra mais foto */
   overflow: hidden;
-}
-.hero-full img{
-  object-fit: cover;
-  object-position: 60% 55%; /* mexe aqui até ficar perfeito */
+  border-bottom: 1px solid var(--border);
+  background: #fff;
 }
 
-/* fundo preenchendo a tela (sem barras) */
-.hero-full::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: var(--hero-img);
-  background-size: cover;
-  background-position: 70% 40%;
-  filter: blur(18px);
-  transform: scale(1.06);
-  z-index: 0;
-}
-
-.hero-full img{
+/* A IMAGEM VIRA “FUNDO” E PREENCHE A TELA */
+.hero-full > img{
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-
-  /* aqui é o segredo: mostra mais da foto (quase inteira) */
-  object-fit: contain;
-  object-position: center;
-
-  z-index: 1;
+  object-fit: cover;          /* <<< sem espaço branco (igual Schwab) */
+  object-position: 60% 55%;   /* ajuste fino (mude se quiser mostrar mais esquerda/direita) */
+  filter: none;
 }
 
-
-
-/* camada de leitura (clareia o lado esquerdo como o Schwab) */
+/* REMOVE blur e overlay (fade) que você tinha antes */
+.hero-full::before,
 .hero-full::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index: 2;
-  background:
-    linear-gradient(90deg,
-      rgba(255,255,255,.96) 0%,
-      rgba(255,255,255,.88) 28%,
-      rgba(255,255,255,.55) 48%,
-      rgba(255,255,255,.15) 66%,
-      rgba(255,255,255,0) 78%
-    );
+  content: none !important;
 }
 
-/* bloco de texto por cima */
+/* Conteúdo por cima (texto/botões) */
 .hero-overlay{
   position: relative;
-  z-index: 3;
-  padding: 56px 0 56px;
+  z-index: 2;
+  padding: clamp(28px, 5vw, 64px) 0;
 }
 
+/* Painel do texto (não altera a foto — só cria leitura) */
 .hero-panel{
   max-width: 560px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 18px;
+  padding: 22px 22px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 14px 40px rgba(2,8,23,.10);
 }
 
 .hero-panel h1{
-  font-size: clamp(40px, 4.2vw, 64px); /* cresce com tela, mas tem limite */
+  font-size: clamp(40px, 4.2vw, 64px);
   line-height: 1.03;
 }
-
 .hero-panel .lead{
   font-size: clamp(16px, 1.2vw, 18px);
   line-height: 1.6;
   max-width: 56ch;
 }
 
-
 @media (max-width: 920px){
-  .hero-full{ min-height: 600px; }
-  .hero-full::after{
-    background: linear-gradient(180deg,
-      rgba(255,255,255,.96) 0%,
-      rgba(255,255,255,.88) 35%,
-      rgba(255,255,255,.30) 70%,
-      rgba(255,255,255,0) 100%
-    );
-  }
-  .hero-overlay{ padding: 36px 0; }
+  .hero-full{ min-height: 640px; }
+  .hero-overlay{ padding: 28px 0; }
   .hero-panel{ max-width: 640px; }
+  .hero-full > img{ object-position: 55% 40%; }
 }
-.hero-full{
-  border-bottom: 1px solid var(--border);
-}
+
 
