@@ -83,43 +83,71 @@
     </section>
 
     <section class="section" id="pacotes">
-      <div class="container">
-        <h2 class="section-title">Pacotes (exemplo de posicionamento)</h2>
-        <p>Você pode ajustar nomes e detalhes depois. Aqui vai uma estrutura clara e corporativa.</p>
+  <div class="container">
+    <h2 class="section-title">Níveis de acesso</h2>
+    <p>Faça login para ver pricing atual e disponibilidade dos planos.</p>
 
-        <div class="grid-3">
-          <div class="card">
-            <h3>Base • Processo Essencial</h3>
-            <p>Checklist de decisão + rotina semanal + regras de risco (modelo pronto).</p>
-            <ul class="list">
-              <li>Checklist (entrar/sair/não-operar)</li>
-              <li>Template de diário e revisão</li>
-              <li>Guia de risco por decisão</li>
-            </ul>
-          </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Starter Access</h3>
+        <p>Para entrar na plataforma, entender o fluxo e acessar a base do ambiente.</p>
+        <ul class="list">
+          <li>Login privado com Google</li>
+          <li>Acesso ao dashboard privado</li>
+          <li>Estrutura inicial da plataforma</li>
+        </ul>
 
-          <div class="card">
-            <h3>Pro • Estrutura + Templates</h3>
-            <p>Tudo do Base + templates avançados e acompanhamento do processo (educacional).</p>
-            <ul class="list">
-              <li>Templates avançados e exemplos</li>
-              <li>Rotina de métricas e hábitos</li>
-              <li>Revisões (processo/execução)</li>
-            </ul>
-          </div>
+        <p class="price-note" style="margin-top:14px; font-size:12px; color:#64748b;">
+          Faça login para ver o preço.
+        </p>
 
-          <div class="card">
-            <h3>Elite • Operação e Governança</h3>
-            <p>Para quem quer um “sistema completo” de execução, com governança e disciplina.</p>
-            <ul class="list">
-              <li>Playbook completo (processo)</li>
-              <li>Políticas de risco e limites</li>
-              <li>Rotina de auditoria do diário</li>
-            </ul>
-          </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+          <a class="btn ghost card-login-btn" href="/aaron-login.html">Faça login para ver o preço</a>
         </div>
       </div>
-    </section>
+
+      <div class="card">
+        <div style="margin-bottom:12px;">
+          <span class="tag blue card-badge">Mais indicado</span>
+        </div>
+
+        <h3>Pro AARON Access</h3>
+        <p>Para quem quer acesso principal à área privada e ao ambiente central do Aaron.</p>
+        <ul class="list">
+          <li>Tudo do Starter</li>
+          <li>Open AARON Panel</li>
+          <li>Ambiente com foco no usuário</li>
+        </ul>
+
+        <p class="price-note" style="margin-top:14px; font-size:12px; color:#64748b;">
+          Faça login para ver o preço.
+        </p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+          <a class="btn ghost card-login-btn" href="/aaron-login.html">Faça login para ver o preço</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Elite Institutional Access</h3>
+        <p>Para uma experiência premium, com prioridade, estrutura expandida e evolução de conta.</p>
+        <ul class="list">
+          <li>Tudo do Pro</li>
+          <li>Prioridade de suporte</li>
+          <li>Base para features premium</li>
+        </ul>
+
+        <p class="price-note" style="margin-top:14px; font-size:12px; color:#64748b;">
+          Faça login para ver o preço.
+        </p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+          <a class="btn ghost card-login-btn" href="/aaron-login.html">Faça login para ver o preço</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <section class="section" id="como-funciona">
       <div class="container">
@@ -265,36 +293,44 @@
       heroTitle: "What we offer",
       heroLead: "A premium package of education + process + tools to operate with consistency. You adjust the level of depth according to your moment.",
       packagesTitle: "Packages (positioning example)",
-      packagesLead: "You can adjust names and details later. Here is a clear, corporate structure.",
-      packageCards: [
-        {
-          title: "Base • Essential Process",
-          text: "Decision checklist + weekly routine + risk rules (ready model).",
-          items: [
-            "Checklist (enter/exit/do not trade)",
-            "Journal and review template",
-            "Risk-per-decision guide"
-          ]
-        },
-        {
-          title: "Pro • Structure + Templates",
-          text: "Everything from Base + advanced templates and process follow-up (educational).",
-          items: [
-            "Advanced templates and examples",
-            "Metrics and habits routine",
-            "Reviews (process/execution)"
-          ]
-        },
-        {
-          title: "Elite • Operations and Governance",
-          text: "For those who want a complete execution system with governance and discipline.",
-          items: [
-            "Complete playbook (process)",
-            "Risk policies and limits",
-            "Journal audit routine"
-          ]
-        }
-      ],
+      packagesTitle: "Access levels",
+packagesLead: "Log in to view current pricing and plan availability.",
+packageCards: [
+  {
+    title: "Starter Access",
+    text: "To enter the platform, understand the flow, and access the base environment.",
+    items: [
+      "Private Google login",
+      "Private dashboard access",
+      "Initial platform structure"
+    ],
+    note: "Log in to view pricing.",
+    button: "Log in to view pricing"
+  },
+  {
+    badge: "Most recommended",
+    title: "Pro AARON Access",
+    text: "For those who want core access to the private area and the main Aaron environment.",
+    items: [
+      "Everything in Starter",
+      "Open AARON Panel",
+      "User-focused environment"
+    ],
+    note: "Log in to view pricing.",
+    button: "Log in to view pricing"
+  },
+  {
+    title: "Elite Institutional Access",
+    text: "For a premium experience with priority, expanded structure, and account evolution.",
+    items: [
+      "Everything in Pro",
+      "Priority support",
+      "Base for premium features"
+    ],
+    note: "Log in to view pricing.",
+    button: "Log in to view pricing"
+  }
+],
       howTitle: "How it works",
       howCards: [
         ["1) Diagnosis", "Objective, time, profile, and routine — clear alignment."],
@@ -360,20 +396,36 @@
     if (topSectionP[0]) topSectionP[0].textContent = t.packagesLead;
 
     const packageCards = document.querySelectorAll("#pacotes .grid-3 .card");
-    packageCards.forEach((card, i) => {
-      const data = t.packageCards[i];
-      if (!data) return;
+packageCards.forEach((card, i) => {
+  const data = t.packageCards[i];
+  if (!data) return;
 
-      const h3 = card.querySelector("h3");
-      const p = card.querySelector("p");
-      const lis = card.querySelectorAll(".list li");
+  const badge = card.querySelector(".card-badge");
+  const h3 = card.querySelector("h3");
+  const p = card.querySelector("p");
+  const lis = card.querySelectorAll(".list li");
+  const note = card.querySelector(".price-note");
+  const btn = card.querySelector(".card-login-btn");
 
-      if (h3) h3.textContent = data.title;
-      if (p) p.textContent = data.text;
-      lis.forEach((li, idx) => {
-        if (data.items[idx] !== undefined) li.textContent = data.items[idx];
-      });
-    });
+  if (badge) {
+    if (data.badge) {
+      badge.textContent = data.badge;
+      badge.style.display = "inline-flex";
+    } else {
+      badge.style.display = "none";
+    }
+  }
+
+  if (h3) h3.textContent = data.title;
+  if (p) p.textContent = data.text;
+
+  lis.forEach((li, idx) => {
+    if (data.items[idx] !== undefined) li.textContent = data.items[idx];
+  });
+
+  if (note) note.textContent = data.note;
+  if (btn) btn.textContent = data.button;
+});
 
     const howCards = document.querySelectorAll("#como-funciona .grid-3 .card");
     howCards.forEach((card, i) => {
