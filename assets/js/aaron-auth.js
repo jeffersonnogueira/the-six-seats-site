@@ -89,6 +89,6 @@ if (continueBtn) {
       return;
     }
 
-    alert(`Authenticated successfully as ${user.email || user.displayName}.`);
+    window.location.href = '/aaron-app.html';
   });
 }

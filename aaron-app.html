@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AARON App — The Six Seats Investments</title>
+  <meta name="description" content="Área privada do AARON." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+
+  <div class="top-utility">
+    <div class="container">
+      <div class="utility-row">
+        <div class="utility-links">
+          <a href="/quem-somos.html">Quem somos</a>
+          <a href="/o-que-oferecemos.html">O que oferecemos</a>
+          <a href="/index.html#contato">Contato</a>
+        </div>
+        <div class="utility-right">
+          <span class="utility-pill">Private Access</span>
+          <a class="utility-pill" href="/index.html">Voltar ao site</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container">
+      <div class="navbar">
+        <a class="brand" href="/index.html" aria-label="Home">
+          <div class="logo"></div>
+          <div class="brand-title">
+            <strong>The Six Seats</strong>
+            <span>Investments • método e risco</span>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Menu">
+          <a href="/index.html">Home</a>
+          <a href="/quem-somos.html">Quem somos</a>
+          <a href="/o-que-oferecemos.html">O que oferecemos</a>
+        </nav>
+
+        <div class="actions">
+          <button class="btn blue" id="logoutBtn" type="button">Logout</button>
+        </div>
+
+        <button class="mobile-toggle" data-mobile-toggle aria-label="Abrir menu">☰</button>
+      </div>
+
+      <div class="mobile-menu" data-mobile-menu>
+        <a href="/index.html">Home</a>
+        <a href="/quem-somos.html">Quem somos</a>
+        <a href="/o-que-oferecemos.html">O que oferecemos</a>
+        <a href="/index.html#contato">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="aaron-login-page">
+    <section class="aaron-login-hero">
+      <div class="container">
+        <div class="aaron-login-shell">
+          <div class="aaron-login-copy">
+            <div class="kicker">
+              <span class="tag blue">Área privada</span>
+              <span class="tag orange">Acesso ativo</span>
+              <span class="tag">AARON</span>
+            </div>
+
+            <h1>Bem-vindo ao seu AARON.</h1>
+
+            <p class="lead">
+              Sua autenticação está ativa. Este é o início da sua área privada,
+              onde vamos conectar o painel individual, preferências e experiência personalizada.
+            </p>
+
+            <ul class="aaron-benefits">
+              <li>Conta autenticada</li>
+              <li>Ambiente privado</li>
+              <li>Base pronta para painel individual</li>
+              <li>Pronto para evoluir para o Aaron real</li>
+            </ul>
+          </div>
+
+          <div class="aaron-login-card">
+            <div class="aaron-login-card-top">
+              <div class="aaron-login-badge">AARON PRIVATE AREA</div>
+              <h2 id="welcomeName">Carregando...</h2>
+              <p id="welcomeEmail">Verificando sessão...</p>
+            </div>
+
+            <div class="aaron-login-actions">
+              <a class="btn blue aaron-enter-btn" href="/index.html">
+                Voltar para o site
+              </a>
+            </div>
+
+            <div class="aaron-login-note" id="appStatus">
+              Checking authentication...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/main.js"></script>
+  <script type="module" src="/assets/js/aaron-app.js"></script>
+</body>
+</html>
