@@ -6,12 +6,12 @@ import {
 } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
 
 const firebaseConfig = {
-  apiKey: "COLE_AQUI_O_APIKEY",
-  authDomain: "COLE_AQUI_O_AUTHDOMAIN",
-  projectId: "COLE_AQUI_O_PROJECTID",
-  storageBucket: "COLE_AQUI_O_STORAGEBUCKET",
-  messagingSenderId: "COLE_AQUI_O_MESSAGINGSENDERID",
-  appId: "COLE_AQUI_O_APPID"
+  apiKey: "AIzaSyB706VVHU7K0nFl_3c-I3G3w1riHlyOE0o",
+  authDomain: "sixseats-aaron.firebaseapp.com",
+  projectId: "sixseats-aaron",
+  storageBucket: "sixseats-aaron.firebasestorage.app",
+  messagingSenderId: "678216895700",
+  appId: "1:678216895700:web:2836323ab00f058ae07f41"
 };
 
 const app = initializeApp(firebaseConfig);
