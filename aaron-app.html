@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AARON App — The Six Seats Investments</title>
-  <meta name="description" content="Área privada do AARON." />
+  <title>AARON Dashboard — The Six Seats Investments</title>
+  <meta name="description" content="Dashboard privado do AARON." />
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
@@ -43,6 +43,7 @@
         </nav>
 
         <div class="actions">
+          <button class="btn ghost" id="settingsBtn" type="button">My Settings</button>
           <button class="btn blue" id="logoutBtn" type="button">Logout</button>
         </div>
 
@@ -58,47 +59,136 @@
     </div>
   </header>
 
-  <main class="aaron-login-page">
+  <main class="aaron-login-page aaron-dashboard-page">
     <section class="aaron-login-hero">
       <div class="container">
-        <div class="aaron-login-shell">
-          <div class="aaron-login-copy">
+        <div class="aaron-dashboard-top">
+          <div class="aaron-dashboard-hero">
             <div class="kicker">
-              <span class="tag blue">Área privada</span>
-              <span class="tag orange">Acesso ativo</span>
+              <span class="tag blue">Dashboard privado</span>
+              <span class="tag orange">Conta ativa</span>
               <span class="tag">AARON</span>
             </div>
 
-            <h1>Bem-vindo ao seu AARON.</h1>
+            <h1 id="welcomeName">Welcome, User</h1>
 
-            <p class="lead">
-              Sua autenticação está ativa. Este é o início da sua área privada,
-              onde vamos conectar o painel individual, preferências e experiência personalizada.
+            <p class="lead" id="appStatus">
+              Authentication active. Private workspace ready.
             </p>
 
-            <ul class="aaron-benefits">
-              <li>Conta autenticada</li>
-              <li>Ambiente privado</li>
-              <li>Base pronta para painel individual</li>
-              <li>Pronto para evoluir para o Aaron real</li>
-            </ul>
+            <div class="aaron-hero-meta">
+              <div class="aaron-hero-chip">
+                <span class="aaron-dot"></span>
+                <span id="accessValue">Private Access Active</span>
+              </div>
+              <div class="aaron-hero-chip">
+                <span>Plan:</span>
+                <strong id="planValue">Founder Access</strong>
+              </div>
+            </div>
+
+            <div class="aaron-hero-actions">
+              <button class="btn blue aaron-enter-btn" id="openPanelBtn" type="button">
+                Open AARON Panel
+              </button>
+              <button class="btn ghost" id="settingsBtnHero" type="button">
+                My Settings
+              </button>
+            </div>
           </div>
 
-          <div class="aaron-login-card">
-            <div class="aaron-login-card-top">
-              <div class="aaron-login-badge">AARON PRIVATE AREA</div>
-              <h2 id="welcomeName">Carregando...</h2>
-              <p id="welcomeEmail">Verificando sessão...</p>
+          <div class="aaron-dashboard-side">
+            <div class="aaron-info-card">
+              <div class="aaron-info-label">Account</div>
+              <div class="aaron-info-main" id="accountName">Loading...</div>
+              <div class="aaron-info-sub" id="accountEmail">Checking session...</div>
             </div>
 
-            <div class="aaron-login-actions">
-              <a class="btn blue aaron-enter-btn" href="/index.html">
-                Voltar para o site
-              </a>
+            <div class="aaron-info-card">
+              <div class="aaron-info-label">Workspace</div>
+              <div class="aaron-info-main" id="workspaceValue">Private AARON Workspace</div>
+              <div class="aaron-info-sub" id="createdValue">Preparing environment...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="aaron-dashboard-grid">
+          <div class="aaron-mini-card">
+            <div class="aaron-mini-label">Favorite Symbol</div>
+            <div class="aaron-mini-value" id="symbolValue">NVDA</div>
+            <div class="aaron-mini-sub">Primary market focus</div>
+          </div>
+
+          <div class="aaron-mini-card">
+            <div class="aaron-mini-label">Preferred Timeframe</div>
+            <div class="aaron-mini-value" id="timeframeValue">1m</div>
+            <div class="aaron-mini-sub">Main execution timeframe</div>
+          </div>
+
+          <div class="aaron-mini-card">
+            <div class="aaron-mini-label">Account Status</div>
+            <div class="aaron-mini-value" id="statusValue">Active</div>
+            <div class="aaron-mini-sub">Secure session validated</div>
+          </div>
+
+          <div class="aaron-mini-card">
+            <div class="aaron-mini-label">Next Layer</div>
+            <div class="aaron-mini-value">Panel Integration</div>
+            <div class="aaron-mini-sub">Ready to connect the real Aaron UI</div>
+          </div>
+        </div>
+
+        <div class="aaron-dashboard-bottom">
+          <div class="aaron-panel-card">
+            <div class="aaron-panel-head">
+              <div>
+                <div class="aaron-info-label">AARON Access</div>
+                <h2>Launch your private environment</h2>
+              </div>
+              <span class="tag blue">Ready</span>
             </div>
 
-            <div class="aaron-login-note" id="appStatus">
-              Checking authentication...
+            <p>
+              Esta área já está pronta para receber o link do seu painel real, preferências do usuário,
+              plano, ativo favorito e as regras de acesso por conta.
+            </p>
+
+            <div class="aaron-panel-actions">
+              <button class="btn blue" id="openPanelBtnBottom" type="button">Open AARON Panel</button>
+              <button class="btn ghost" id="settingsBtnBottom" type="button">My Settings</button>
+            </div>
+          </div>
+
+          <div class="aaron-panel-card">
+            <div class="aaron-panel-head">
+              <div>
+                <div class="aaron-info-label">Account Snapshot</div>
+                <h2>Private profile data</h2>
+              </div>
+              <span class="tag orange">Live</span>
+            </div>
+
+            <div class="aaron-snapshot-list">
+              <div class="aaron-snapshot-row">
+                <span>Name</span>
+                <strong id="snapshotName">Loading...</strong>
+              </div>
+              <div class="aaron-snapshot-row">
+                <span>Email</span>
+                <strong id="snapshotEmail">Checking...</strong>
+              </div>
+              <div class="aaron-snapshot-row">
+                <span>Plan</span>
+                <strong id="snapshotPlan">Founder Access</strong>
+              </div>
+              <div class="aaron-snapshot-row">
+                <span>Symbol</span>
+                <strong id="snapshotSymbol">NVDA</strong>
+              </div>
+              <div class="aaron-snapshot-row">
+                <span>Timeframe</span>
+                <strong id="snapshotTimeframe">1m</strong>
+              </div>
             </div>
           </div>
         </div>
