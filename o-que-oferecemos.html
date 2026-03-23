@@ -18,9 +18,14 @@
           <a href="#contato">Contato</a>
         </div>
         <div class="utility-right">
-          <span class="utility-pill">Atendimento Premium</span>
-          <a class="utility-pill" href="#contato">Falar conosco</a>
-        </div>
+  <div class="lang-switch" aria-label="Language switch">
+    <button class="lang-btn active" type="button" data-lang="pt">PT</button>
+    <button class="lang-btn" type="button" data-lang="en">EN</button>
+  </div>
+
+  <span class="utility-pill" id="utilityService">Atendimento Premium</span>
+  <a class="utility-pill" href="#contato" id="utilityTalk">Falar conosco</a>
+</div>
       </div>
     </div>
   </div>
@@ -184,5 +189,246 @@
   </main>
 
   <script src="/assets/js/main.js"></script>
+
+<script>
+  const i18nOferecemos = {
+    pt: {
+      title: "O que oferecemos — The Six Seats",
+      meta: "Pacotes de estrutura: processo, templates e governança para operar com consistência.",
+      utilityLinks: ["Quem somos", "O que oferecemos", "Contato"],
+      utilityPills: ["Atendimento Premium", "Falar conosco"],
+      nav: ["Home", "Quem somos", "O que oferecemos"],
+      actionBtns: ["Como funciona", "Falar conosco"],
+      kicker: ["Estrutura", "Execução", "Governança"],
+      heroTitle: "O que oferecemos",
+      heroLead: "Um pacote premium de educação + processo + ferramentas para operar com consistência. Você ajusta o nível de profundidade conforme seu momento.",
+      packagesTitle: "Pacotes (exemplo de posicionamento)",
+      packagesLead: "Você pode ajustar nomes e detalhes depois. Aqui vai uma estrutura clara e corporativa.",
+      packageCards: [
+        {
+          title: "Base • Processo Essencial",
+          text: "Checklist de decisão + rotina semanal + regras de risco (modelo pronto).",
+          items: [
+            "Checklist (entrar/sair/não-operar)",
+            "Template de diário e revisão",
+            "Guia de risco por decisão"
+          ]
+        },
+        {
+          title: "Pro • Estrutura + Templates",
+          text: "Tudo do Base + templates avançados e acompanhamento do processo (educacional).",
+          items: [
+            "Templates avançados e exemplos",
+            "Rotina de métricas e hábitos",
+            "Revisões (processo/execução)"
+          ]
+        },
+        {
+          title: "Elite • Operação e Governança",
+          text: "Para quem quer um “sistema completo” de execução, com governança e disciplina.",
+          items: [
+            "Playbook completo (processo)",
+            "Políticas de risco e limites",
+            "Rotina de auditoria do diário"
+          ]
+        }
+      ],
+      howTitle: "Como funciona",
+      howCards: [
+        ["1) Diagnóstico", "Objetivo, tempo, perfil e rotina — alinhamento claro."],
+        ["2) Setup", "Checklists, regras, templates e limites — estrutura pronta."],
+        ["3) Execução + Revisão", "Rotina simples e repetível + melhoria contínua."]
+      ],
+      notTitle: "O que não fazemos",
+      notItems: [
+        "Prometer retorno.",
+        "Dar recomendação individual de compra/venda no site.",
+        "Substituir aconselhamento de um profissional licenciado."
+      ],
+      contactTitle: "Contato",
+      contactLead: "Quer montar sua operação com disciplina e clareza? Vamos conversar.",
+      contactBtns: ["Enviar e-mail", "Voltar para Home"],
+      contactNote: "Troque o e-mail para o seu domínio real.",
+      brandSub: "Investments • método e risco",
+      footerSub: "Clareza • Disciplina • Risco",
+      footerFine: "Disclaimer: Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal, nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros."
+    },
+
+    en: {
+      title: "What we offer — The Six Seats",
+      meta: "Structure packages: process, templates, and governance to operate with consistency.",
+      utilityLinks: ["Who we are", "What we offer", "Contact"],
+      utilityPills: ["Premium Support", "Talk to us"],
+      nav: ["Home", "Who we are", "What we offer"],
+      actionBtns: ["How it works", "Talk to us"],
+      kicker: ["Structure", "Execution", "Governance"],
+      heroTitle: "What we offer",
+      heroLead: "A premium package of education + process + tools to operate with consistency. You adjust the level of depth according to your moment.",
+      packagesTitle: "Packages (positioning example)",
+      packagesLead: "You can adjust names and details later. Here is a clear, corporate structure.",
+      packageCards: [
+        {
+          title: "Base • Essential Process",
+          text: "Decision checklist + weekly routine + risk rules (ready model).",
+          items: [
+            "Checklist (enter/exit/do not trade)",
+            "Journal and review template",
+            "Risk-per-decision guide"
+          ]
+        },
+        {
+          title: "Pro • Structure + Templates",
+          text: "Everything from Base + advanced templates and process follow-up (educational).",
+          items: [
+            "Advanced templates and examples",
+            "Metrics and habits routine",
+            "Reviews (process/execution)"
+          ]
+        },
+        {
+          title: "Elite • Operations and Governance",
+          text: "For those who want a complete execution system with governance and discipline.",
+          items: [
+            "Complete playbook (process)",
+            "Risk policies and limits",
+            "Journal audit routine"
+          ]
+        }
+      ],
+      howTitle: "How it works",
+      howCards: [
+        ["1) Diagnosis", "Objective, time, profile, and routine — clear alignment."],
+        ["2) Setup", "Checklists, rules, templates, and limits — ready structure."],
+        ["3) Execution + Review", "Simple, repeatable routine + continuous improvement."]
+      ],
+      notTitle: "What we do not do",
+      notItems: [
+        "Promise returns.",
+        "Provide individualized buy/sell recommendations on the website.",
+        "Replace advice from a licensed professional."
+      ],
+      contactTitle: "Contact",
+      contactLead: "Want to build your operation with discipline and clarity? Let's talk.",
+      contactBtns: ["Send email", "Back to Home"],
+      contactNote: "Replace the email with your real domain.",
+      brandSub: "Investments • method and risk",
+      footerSub: "Clarity • Discipline • Risk",
+      footerFine: "Disclaimer: Educational and informational content only. It does not constitute financial, legal, or tax advice, nor an individualized recommendation to buy or sell. Past results do not guarantee future results."
+    }
+  };
+
+  function oqSetList(selector, values) {
+    const els = document.querySelectorAll(selector);
+    els.forEach((el, i) => {
+      if (values[i] !== undefined) el.textContent = values[i];
+    });
+  }
+
+  function oqSetText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  }
+
+  function applyOferecemosLanguage(lang) {
+    const t = i18nOferecemos[lang] || i18nOferecemos.pt;
+
+    document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+    document.title = t.title;
+
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", t.meta);
+
+    oqSetList(".utility-links a", t.utilityLinks);
+    oqSetText("#utilityService", t.utilityPills[0]);
+    oqSetText("#utilityTalk", t.utilityPills[1]);
+
+    oqSetList(".nav-links a", t.nav);
+    oqSetList(".mobile-menu a", [...t.nav, t.utilityLinks[2]]);
+    oqSetList(".actions .btn", t.actionBtns);
+
+    oqSetList(".kicker .tag", t.kicker);
+    oqSetText(".section .card h1", t.heroTitle);
+
+    const heroLead = document.querySelector(".section .card .lead");
+    if (heroLead) heroLead.textContent = t.heroLead;
+
+    const sectionTitles = document.querySelectorAll(".section-title");
+    if (sectionTitles[0]) sectionTitles[0].textContent = t.packagesTitle;
+    if (sectionTitles[1]) sectionTitles[1].textContent = t.howTitle;
+
+    const topSectionP = document.querySelectorAll(".section > .container > p");
+    if (topSectionP[0]) topSectionP[0].textContent = t.packagesLead;
+
+    const packageCards = document.querySelectorAll("#pacotes .grid-3 .card");
+    packageCards.forEach((card, i) => {
+      const data = t.packageCards[i];
+      if (!data) return;
+
+      const h3 = card.querySelector("h3");
+      const p = card.querySelector("p");
+      const lis = card.querySelectorAll(".list li");
+
+      if (h3) h3.textContent = data.title;
+      if (p) p.textContent = data.text;
+      lis.forEach((li, idx) => {
+        if (data.items[idx] !== undefined) li.textContent = data.items[idx];
+      });
+    });
+
+    const howCards = document.querySelectorAll("#como-funciona .grid-3 .card");
+    howCards.forEach((card, i) => {
+      const data = t.howCards[i];
+      if (!data) return;
+
+      const h3 = card.querySelector("h3");
+      const p = card.querySelector("p");
+      if (h3) h3.textContent = data[0];
+      if (p) p.textContent = data[1];
+    });
+
+    const notCard = document.querySelector("#como-funciona .section .card");
+    if (notCard) {
+      const h2 = notCard.querySelector("h2");
+      const lis = notCard.querySelectorAll(".list li");
+      if (h2) h2.textContent = t.notTitle;
+      lis.forEach((li, i) => {
+        if (t.notItems[i] !== undefined) li.textContent = t.notItems[i];
+      });
+    }
+
+    const contactCard = document.querySelector("#contato .card");
+    if (contactCard) {
+      const h2 = contactCard.querySelector("h2");
+      const pList = contactCard.querySelectorAll("p");
+      const btns = contactCard.querySelectorAll(".btn");
+
+      if (h2) h2.textContent = t.contactTitle;
+      if (pList[0]) pList[0].textContent = t.contactLead;
+      if (btns[0]) btns[0].textContent = t.contactBtns[0];
+      if (btns[1]) btns[1].textContent = t.contactBtns[1];
+      if (pList[1]) pList[1].textContent = t.contactNote;
+    }
+
+    document.querySelectorAll(".brand-title span").forEach(el => el.textContent = t.brandSub);
+
+    const footerSub = document.querySelector("footer .row span");
+    if (footerSub) footerSub.textContent = t.footerSub;
+
+    const footerFine = document.querySelector(".footer .fine");
+    if (footerFine) footerFine.textContent = t.footerFine;
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    localStorage.setItem("siteLanguage", lang);
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => applyOferecemosLanguage(btn.dataset.lang));
+  });
+
+  applyOferecemosLanguage(localStorage.getItem("siteLanguage") || "pt");
+</script>
 </body>
 </html>

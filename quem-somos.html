@@ -18,9 +18,14 @@
           <a href="#contato">Contato</a>
         </div>
         <div class="utility-right">
-          <span class="utility-pill">Atendimento Premium</span>
-          <a class="utility-pill" href="#contato">Falar conosco</a>
-        </div>
+  <div class="lang-switch" aria-label="Language switch">
+    <button class="lang-btn active" type="button" data-lang="pt">PT</button>
+    <button class="lang-btn" type="button" data-lang="en">EN</button>
+  </div>
+
+  <span class="utility-pill" id="utilityService">Atendimento Premium</span>
+  <a class="utility-pill" href="#contato" id="utilityTalk">Falar conosco</a>
+</div>
       </div>
     </div>
   </div>
@@ -138,5 +143,148 @@
   </main>
 
   <script src="/assets/js/main.js"></script>
+
+<script>
+  const i18nQuemSomos = {
+    pt: {
+      title: "Quem somos — The Six Seats",
+      meta: "Nossa filosofia: clareza, disciplina e gestão de risco antes de qualquer decisão.",
+      utilityLinks: ["Quem somos", "O que oferecemos", "Contato"],
+      utilityPills: ["Atendimento Premium", "Falar conosco"],
+      nav: ["Home", "Quem somos", "O que oferecemos"],
+      actionBtns: ["Como funciona", "Falar conosco"],
+      kicker: ["Clareza", "Disciplina", "Risco"],
+      heroTitle: "Quem somos",
+      heroLead: "The Six Seats é uma estrutura premium focada em processo: decisões claras, execução disciplinada e gestão de risco operacional — com linguagem simples e repetível.",
+      heroText: "Nosso foco não é “prometer retorno”, e sim construir um sistema de rotina e critérios para reduzir ruído, evitar impulsos e aumentar consistência.",
+      philosophyTitle: "Nossa filosofia",
+      philosophyCards: [
+        ["Processo acima de emoção", "Você não precisa “adivinhar”. Você precisa de critérios."],
+        ["Risco primeiro", "Limites, cenários e proteção do capital antes do ganho."],
+        ["Revisão e melhoria", "Registro → revisão → ajuste → evolução contínua."]
+      ],
+      contactTitle: "Contato",
+      contactLead: "Quer aplicar isso na sua rotina de forma simples e profissional? Vamos conversar.",
+      contactBtns: ["Enviar e-mail", "Ver pacotes"],
+      contactNote: "Troque o e-mail para o seu domínio real.",
+      brandSub: "Investments • método e risco",
+      footerSub: "Clareza • Disciplina • Risco",
+      footerFine: "Disclaimer: Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal, nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros."
+    },
+
+    en: {
+      title: "Who we are — The Six Seats",
+      meta: "Our philosophy: clarity, discipline, and risk management before any decision.",
+      utilityLinks: ["Who we are", "What we offer", "Contact"],
+      utilityPills: ["Premium Support", "Talk to us"],
+      nav: ["Home", "Who we are", "What we offer"],
+      actionBtns: ["How it works", "Talk to us"],
+      kicker: ["Clarity", "Discipline", "Risk"],
+      heroTitle: "Who we are",
+      heroLead: "The Six Seats is a premium structure focused on process: clear decisions, disciplined execution, and operational risk management — with simple, repeatable language.",
+      heroText: "Our focus is not to “promise returns,” but to build a routine and criteria system that reduces noise, avoids impulsive decisions, and increases consistency.",
+      philosophyTitle: "Our philosophy",
+      philosophyCards: [
+        ["Process over emotion", "You do not need to “guess.” You need criteria."],
+        ["Risk first", "Limits, scenarios, and capital protection before profit."],
+        ["Review and improvement", "Record → review → adjust → continuous evolution."]
+      ],
+      contactTitle: "Contact",
+      contactLead: "Want to apply this in your routine in a simple and professional way? Let's talk.",
+      contactBtns: ["Send email", "View packages"],
+      contactNote: "Replace the email with your real domain.",
+      brandSub: "Investments • method and risk",
+      footerSub: "Clarity • Discipline • Risk",
+      footerFine: "Disclaimer: Educational and informational content only. It does not constitute financial, legal, or tax advice, nor an individualized recommendation to buy or sell. Past results do not guarantee future results."
+    }
+  };
+
+  function qsSetList(selector, values) {
+    const els = document.querySelectorAll(selector);
+    els.forEach((el, i) => {
+      if (values[i] !== undefined) el.textContent = values[i];
+    });
+  }
+
+  function qsSetText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  }
+
+  function applyQuemSomosLanguage(lang) {
+    const t = i18nQuemSomos[lang] || i18nQuemSomos.pt;
+
+    document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+    document.title = t.title;
+
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", t.meta);
+
+    qsSetList(".utility-links a", t.utilityLinks);
+    qsSetText("#utilityService", t.utilityPills[0]);
+    qsSetText("#utilityTalk", t.utilityPills[1]);
+
+    qsSetList(".nav-links a", t.nav);
+    qsSetList(".mobile-menu a", [...t.nav, t.utilityLinks[2]]);
+    qsSetList(".actions .btn", t.actionBtns);
+
+    qsSetList(".kicker .tag", t.kicker);
+    qsSetText(".section .card h1", t.heroTitle);
+
+    const heroCard = document.querySelectorAll(".section .card")[0];
+    if (heroCard) {
+      const lead = heroCard.querySelector(".lead");
+      const paragraphs = heroCard.querySelectorAll("p");
+      if (lead) lead.textContent = t.heroLead;
+      if (paragraphs[1]) paragraphs[1].textContent = t.heroText;
+    }
+
+    const sectionTitles = document.querySelectorAll(".section-title");
+    if (sectionTitles[0]) sectionTitles[0].textContent = t.philosophyTitle;
+
+    const philosophyCards = document.querySelectorAll(".grid-3 .card");
+    philosophyCards.forEach((card, i) => {
+      const h3 = card.querySelector("h3");
+      const p = card.querySelector("p");
+      if (t.philosophyCards[i]) {
+        if (h3) h3.textContent = t.philosophyCards[i][0];
+        if (p) p.textContent = t.philosophyCards[i][1];
+      }
+    });
+
+    const contactCard = document.querySelectorAll(".section .card")[4];
+    if (contactCard) {
+      const h2 = contactCard.querySelector("h2");
+      const pList = contactCard.querySelectorAll("p");
+      const btns = contactCard.querySelectorAll(".btn");
+
+      if (h2) h2.textContent = t.contactTitle;
+      if (pList[0]) pList[0].textContent = t.contactLead;
+      if (btns[0]) btns[0].textContent = t.contactBtns[0];
+      if (btns[1]) btns[1].textContent = t.contactBtns[1];
+      if (pList[1]) pList[1].textContent = t.contactNote;
+    }
+
+    document.querySelectorAll(".brand-title span").forEach(el => el.textContent = t.brandSub);
+
+    const footerSub = document.querySelector("footer .row span");
+    if (footerSub) footerSub.textContent = t.footerSub;
+
+    const footerFine = document.querySelector(".footer .fine");
+    if (footerFine) footerFine.textContent = t.footerFine;
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    localStorage.setItem("siteLanguage", lang);
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => applyQuemSomosLanguage(btn.dataset.lang));
+  });
+
+  applyQuemSomosLanguage(localStorage.getItem("siteLanguage") || "pt");
+</script>
 </body>
 </html>
