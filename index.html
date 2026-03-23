@@ -19,9 +19,14 @@
           <a href="#contato">Contato</a>
         </div>
         <div class="utility-right">
-          <span class="utility-pill">Atendimento Premium</span>
-          <a class="utility-pill" href="#contato">Falar conosco</a>
-        </div>
+  <div class="lang-switch" aria-label="Language switch">
+    <button class="lang-btn active" type="button" data-lang="pt">PT</button>
+    <button class="lang-btn" type="button" data-lang="en">EN</button>
+  </div>
+
+  <span class="utility-pill" id="utilityService">Atendimento Premium</span>
+  <a class="utility-pill" href="#contato" id="utilityTalk">Falar conosco</a>
+</div>
       </div>
     </div>
   </div>
@@ -173,5 +178,163 @@
   </main>
 
   <script src="/assets/js/main.js"></script>
+
+<script>
+  const i18n = {
+    pt: {
+      title: "The Six Seats Investments — Clareza e método",
+      meta: "Estrutura, processo e disciplina: decisões com foco em risco, consistência e execução.",
+      utilityLinks: ["Quem somos", "O que oferecemos", "Contato"],
+      utilityPills: ["Atendimento Premium", "Falar conosco"],
+      nav: ["Home", "Quem somos", "O que oferecemos"],
+      heroTags: ["Clareza", "Disciplina", "Gestão de risco"],
+      heroTitle: "O poder da escolha — com método.",
+      heroLead: "Da organização do seu processo à execução disciplinada: ajudamos você a reduzir ruído, melhorar decisões e operar com consistência — sem promessas, apenas estrutura.",
+      heroCtas: ["Agendar conversa", "Ver o que oferecemos"],
+      disclaimer: "Conteúdo educacional e estrutura de processo. Não é recomendação individual de investimento.",
+      stripBold: ["Disciplina", "Risco", "Rotina", "Revisão"],
+      stripText: ["Processo acima de emoção", "Limites e cenários", "Execução repetível", "Melhoria contínua"],
+      benefitTitle: "O que você ganha na prática",
+      benefitLead: "Um caminho corporativo, direto e repetível para tomar decisões melhores.",
+      cardTitles: ["Framework de decisão", "Rotina e disciplina", "Controle de risco"],
+      cardTexts: [
+        "Critérios claros para agir (ou não agir), evitando impulsos.",
+        "Preparação, execução e revisão — com estrutura simples.",
+        "Risco por decisão, limites e proteção de capital."
+      ],
+      contactTitle: "Contato",
+      contactLead: "Quer transformar isso em um processo real na sua rotina? Vamos conversar.",
+      contactButtons: ["Enviar e-mail", "Ver pacotes"],
+      contactNote: "Troque o e-mail para o seu domínio real.",
+      brandSub: "Investments • método e risco",
+      footerSub: "Clareza • Disciplina • Risco",
+      footerFine: "Disclaimer: Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal, nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros."
+    },
+
+    en: {
+      title: "The Six Seats Investments — Clarity and method",
+      meta: "Structure, process, and discipline: decisions focused on risk, consistency, and execution.",
+      utilityLinks: ["Who we are", "What we offer", "Contact"],
+      utilityPills: ["Premium Support", "Talk to us"],
+      nav: ["Home", "Who we are", "What we offer"],
+      heroTags: ["Clarity", "Discipline", "Risk management"],
+      heroTitle: "The power of choice — with method.",
+      heroLead: "From organizing your process to disciplined execution: we help you reduce noise, improve decisions, and operate with consistency — no promises, just structure.",
+      heroCtas: ["Schedule a conversation", "See what we offer"],
+      disclaimer: "Educational content and process structure. This is not individualized investment advice.",
+      stripBold: ["Discipline", "Risk", "Routine", "Review"],
+      stripText: ["Process over emotion", "Limits and scenarios", "Repeatable execution", "Continuous improvement"],
+      benefitTitle: "What you gain in practice",
+      benefitLead: "A corporate, direct, and repeatable path to make better decisions.",
+      cardTitles: ["Decision framework", "Routine and discipline", "Risk control"],
+      cardTexts: [
+        "Clear criteria to act (or not act), avoiding impulsive decisions.",
+        "Preparation, execution, and review — with simple structure.",
+        "Risk per decision, limits, and capital protection."
+      ],
+      contactTitle: "Contact",
+      contactLead: "Want to turn this into a real process in your routine? Let's talk.",
+      contactButtons: ["Send email", "View packages"],
+      contactNote: "Replace the email with your real domain.",
+      brandSub: "Investments • method and risk",
+      footerSub: "Clarity • Discipline • Risk",
+      footerFine: "Disclaimer: Educational and informational content only. It does not constitute financial, legal, or tax advice, nor an individualized recommendation to buy or sell. Past results do not guarantee future results."
+    }
+  };
+
+  function setList(selector, values) {
+    const els = document.querySelectorAll(selector);
+    els.forEach((el, i) => {
+      if (values[i] !== undefined) el.textContent = values[i];
+    });
+  }
+
+  function setText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  }
+
+  function applyLanguage(lang) {
+    const t = i18n[lang] || i18n.pt;
+
+    document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+    document.title = t.title;
+
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", t.meta);
+
+    setList(".utility-links a", t.utilityLinks);
+    setText("#utilityService", t.utilityPills[0]);
+    setText("#utilityTalk", t.utilityPills[1]);
+
+    setList(".nav-links a", t.nav);
+    setList(".mobile-menu a", [...t.nav, t.utilityLinks[2]]);
+
+    setList(".hero-panel .tag", t.heroTags);
+    setText(".hero-panel h1", t.heroTitle);
+    setText(".hero-panel .lead", t.heroLead);
+    setList(".hero-cta .btn", t.heroCtas);
+    setText(".disclaimer", t.disclaimer);
+
+    const stripItems = document.querySelectorAll(".strip-item");
+    stripItems.forEach((item, i) => {
+      const b = item.querySelector("b");
+      const span = item.querySelector("span");
+      if (b && t.stripBold[i] !== undefined) b.textContent = t.stripBold[i];
+      if (span && t.stripText[i] !== undefined) span.textContent = t.stripText[i];
+    });
+
+    const sections = document.querySelectorAll(".section");
+    if (sections[0]) {
+      const h2 = sections[0].querySelector(".section-title");
+      const p = sections[0].querySelector("p");
+      if (h2) h2.textContent = t.benefitTitle;
+      if (p) p.textContent = t.benefitLead;
+
+      const cards = sections[0].querySelectorAll(".grid-3 .card");
+      cards.forEach((card, i) => {
+        const h3 = card.querySelector("h3");
+        const p = card.querySelector("p");
+        if (h3 && t.cardTitles[i] !== undefined) h3.textContent = t.cardTitles[i];
+        if (p && t.cardTexts[i] !== undefined) p.textContent = t.cardTexts[i];
+      });
+    }
+
+    if (sections[1]) {
+      const h2 = sections[1].querySelector("h2");
+      const pList = sections[1].querySelectorAll("p");
+      const btns = sections[1].querySelectorAll(".btn");
+
+      if (h2) h2.textContent = t.contactTitle;
+      if (pList[0]) pList[0].textContent = t.contactLead;
+      if (btns[0]) btns[0].textContent = t.contactButtons[0];
+      if (btns[1]) btns[1].textContent = t.contactButtons[1];
+      if (pList[1]) pList[1].textContent = t.contactNote;
+    }
+
+    const brandSubs = document.querySelectorAll(".brand-title span");
+    brandSubs.forEach(el => el.textContent = t.brandSub);
+
+    const footerSub = document.querySelector("footer .row span");
+    if (footerSub) footerSub.textContent = t.footerSub;
+
+    const footerFine = document.querySelector(".footer .fine");
+    if (footerFine) footerFine.textContent = t.footerFine;
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    localStorage.setItem("siteLanguage", lang);
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      applyLanguage(btn.dataset.lang);
+    });
+  });
+
+  applyLanguage(localStorage.getItem("siteLanguage") || "pt");
+</script>
 </body>
 </html>
