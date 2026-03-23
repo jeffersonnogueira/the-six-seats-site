@@ -96,20 +96,19 @@
             </div>
 
             <div class="aaron-login-actions">
-              <button class="btn aaron-google-btn" type="button">
-                <span class="google-icon">G</span>
-                Login with your Google account
-              </button>
+  <button class="btn aaron-google-btn" id="googleLoginBtn" type="button">
+    <span class="google-icon">G</span>
+    Login with your Google account
+  </button>
 
-              <a class="btn blue aaron-enter-btn" href="#">
-                Continue to secure access
-              </a>
-            </div>
+  <button class="btn blue aaron-enter-btn" id="continueBtn" type="button">
+    Continue to secure access
+  </button>
+</div>
 
-            <div class="aaron-login-note">
-              Nesta etapa, estamos preparando a interface. No próximo passo, ligaremos
-              este botão ao login real do Google.
-            </div>
+<div class="aaron-login-note" id="loginStatus">
+  Sign in with Google to activate secure access.
+</div>
           </div>
         </div>
       </div>
@@ -117,5 +116,6 @@
   </main>
 
   <script src="/assets/js/main.js"></script>
+<script type="module" src="/assets/js/aaron-auth.js"></script>
 </body>
 </html>
