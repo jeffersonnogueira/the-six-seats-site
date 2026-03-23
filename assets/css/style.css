@@ -861,3 +861,177 @@ h3{ font-size: 18px; }
     width: 100%;
   }
 }
+/* ===== SUBSCRIPTIONS PAGE ===== */
+.subscriptions-page{
+  padding-bottom: 56px;
+}
+
+.subscriptions-hero{
+  padding: 28px 28px;
+}
+
+.subscriptions-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.subscription-card{
+  position: relative;
+  background: rgba(255,255,255,.96);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px 22px;
+  box-shadow: 0 18px 60px rgba(2,8,23,.08);
+}
+
+.subscription-card.featured{
+  border-color: rgba(11,116,209,.28);
+  box-shadow: 0 20px 60px rgba(11,116,209,.12);
+}
+
+.subscription-badge{
+  position:absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #0b3b67;
+  background: rgba(11,116,209,.10);
+  border: 1px solid rgba(11,116,209,.16);
+}
+
+.subscription-head p{
+  margin-bottom: 0;
+}
+
+.subscription-kicker{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.subscription-price{
+  display:flex;
+  align-items:flex-end;
+  gap: 4px;
+  margin: 22px 0 20px;
+}
+
+.subscription-price .currency{
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.subscription-price .value{
+  font-size: 56px;
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.04em;
+}
+
+.subscription-price .period{
+  font-size: 14px;
+  color: #64748b;
+  padding-bottom: 6px;
+}
+
+.subscription-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display:grid;
+  gap: 12px;
+}
+
+.subscription-list li{
+  position:relative;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.subscription-list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.60em;
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background: var(--blue);
+  box-shadow: 0 0 0 4px rgba(11,116,209,.12);
+}
+
+.subscription-btn{
+  width: 100%;
+  margin-top: 22px;
+}
+
+.comparison-card{
+  padding: 22px 22px;
+}
+
+.comparison-table{
+  margin-top: 14px;
+  display:grid;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.comparison-row{
+  display:grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 0;
+}
+
+.comparison-row > div{
+  padding: 14px 14px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+}
+
+.comparison-row > div:last-child{
+  border-right: none;
+}
+
+.comparison-row:last-child > div{
+  border-bottom: none;
+}
+
+.comparison-head > div{
+  font-weight: 800;
+  color: #0f172a;
+  background: rgba(11,116,209,.06);
+}
+
+@media (max-width: 1100px){
+  .subscriptions-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px){
+  .comparison-row{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .comparison-row > div{
+    font-size: 14px;
+  }
+
+  .subscription-card,
+  .comparison-card,
+  .subscriptions-hero{
+    border-radius: 20px;
+  }
+}

@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subscriptions — The Six Seats</title>
+  <meta name="description" content="Planos e subscriptions da plataforma The Six Seats e do acesso ao AARON." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+
+  <div class="top-utility">
+    <div class="container">
+      <div class="utility-row">
+        <div class="utility-links">
+          <a href="/quem-somos" data-nav>Quem somos</a>
+          <a href="/o-que-oferecemos" data-nav>O que oferecemos</a>
+          <a href="#contato">Contato</a>
+        </div>
+
+        <div class="utility-right">
+          <div class="lang-switch" aria-label="Language switch">
+            <button class="lang-btn active" type="button" data-lang="pt">PT</button>
+            <button class="lang-btn" type="button" data-lang="en">EN</button>
+          </div>
+
+          <span class="utility-pill" id="utilityService">Atendimento Premium</span>
+          <a class="utility-pill" href="#contato" id="utilityTalk">Falar conosco</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container">
+      <div class="navbar">
+        <a class="brand" href="/" aria-label="Home">
+          <div class="logo"></div>
+          <div class="brand-title">
+            <strong>The Six Seats</strong>
+            <span id="brandSub">Investments • método e risco</span>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Menu">
+          <a data-nav href="/">Home</a>
+          <a data-nav href="/quem-somos">Quem somos</a>
+          <a data-nav href="/o-que-oferecemos">O que oferecemos</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn ghost" href="/aaron-login.html" id="loginBtnTop">Login into AARON</a>
+          <a class="btn blue" href="#plans" id="compareBtnTop">Ver planos</a>
+        </div>
+
+        <button class="mobile-toggle" data-mobile-toggle aria-label="Abrir menu">☰</button>
+      </div>
+
+      <div class="mobile-menu" data-mobile-menu>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/quem-somos">Quem somos</a>
+        <a data-nav href="/o-que-oferecemos">O que oferecemos</a>
+        <a href="#contato">Contato</a>
+        <a href="/aaron-login.html">Login into AARON</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="subscriptions-page">
+    <section class="section">
+      <div class="container">
+        <div class="subscriptions-hero card">
+          <div class="kicker">
+            <span class="tag blue" id="heroTag1">Planos</span>
+            <span class="tag orange" id="heroTag2">Acesso</span>
+            <span class="tag" id="heroTag3">AARON</span>
+          </div>
+
+          <h1 id="heroTitle">Subscriptions e acesso à plataforma</h1>
+
+          <p class="lead" id="heroLead">
+            Escolha o nível de acesso ideal para sua rotina. Comece simples, evolua com estrutura e
+            avance para um ambiente mais completo conforme sua operação cresce.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn blue" href="#plans" id="heroBtn1">Ver subscriptions</a>
+            <a class="btn ghost" href="/aaron-login.html" id="heroBtn2">Entrar no AARON</a>
+          </div>
+
+          <div class="disclaimer" id="heroDisclaimer">
+            Os preços abaixo são apenas estrutura inicial de apresentação. Depois ligaremos isso ao Stripe real.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="container">
+        <h2 class="section-title" id="plansTitle">Escolha seu plano</h2>
+        <p id="plansLead">Uma estrutura simples, profissional e escalável para acesso à plataforma.</p>
+
+        <div class="subscriptions-grid">
+          <div class="subscription-card">
+            <div class="subscription-head">
+              <div class="subscription-kicker" id="starterKicker">Starter</div>
+              <h3 id="starterTitle">Starter Access</h3>
+              <p id="starterText">Para entrar na plataforma, conhecer o fluxo e acessar a base do ambiente.</p>
+            </div>
+
+            <div class="subscription-price">
+              <span class="currency">$</span>
+              <span class="value">29</span>
+              <span class="period" id="monthly1">/mês</span>
+            </div>
+
+            <ul class="subscription-list">
+              <li id="starterLi1">Login privado com Google</li>
+              <li id="starterLi2">Acesso ao dashboard privado</li>
+              <li id="starterLi3">Estrutura inicial da plataforma</li>
+              <li id="starterLi4">Pronto para upgrade futuro</li>
+            </ul>
+
+            <a class="btn ghost subscription-btn" href="/aaron-login.html" id="starterBtn">Começar</a>
+          </div>
+
+          <div class="subscription-card featured">
+            <div class="subscription-badge" id="featuredBadge">Mais indicado</div>
+
+            <div class="subscription-head">
+              <div class="subscription-kicker" id="proKicker">Pro</div>
+              <h3 id="proTitle">Pro AARON Access</h3>
+              <p id="proText">Para quem quer acesso principal à área privada e ao ambiente central do Aaron.</p>
+            </div>
+
+            <div class="subscription-price">
+              <span class="currency">$</span>
+              <span class="value">79</span>
+              <span class="period" id="monthly2">/mês</span>
+            </div>
+
+            <ul class="subscription-list">
+              <li id="proLi1">Tudo do Starter</li>
+              <li id="proLi2">Open AARON Panel</li>
+              <li id="proLi3">Ambiente com foco no usuário</li>
+              <li id="proLi4">Base para billing e expansão</li>
+            </ul>
+
+            <a class="btn blue subscription-btn" href="/aaron-login.html" id="proBtn">Entrar agora</a>
+          </div>
+
+          <div class="subscription-card">
+            <div class="subscription-head">
+              <div class="subscription-kicker" id="eliteKicker">Elite</div>
+              <h3 id="eliteTitle">Elite Institutional Access</h3>
+              <p id="eliteText">Para uma experiência premium, com prioridade, estrutura expandida e evolução de conta.</p>
+            </div>
+
+            <div class="subscription-price">
+              <span class="currency">$</span>
+              <span class="value">149</span>
+              <span class="period" id="monthly3">/mês</span>
+            </div>
+
+            <ul class="subscription-list">
+              <li id="eliteLi1">Tudo do Pro</li>
+              <li id="eliteLi2">Prioridade de suporte</li>
+              <li id="eliteLi3">Base para features premium</li>
+              <li id="eliteLi4">Preparado para gestão avançada</li>
+            </ul>
+
+            <a class="btn ghost subscription-btn" href="#contato" id="eliteBtn">Falar com a equipe</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="comparison-card card">
+          <h2 class="section-title" id="compareTitle">Comparação rápida</h2>
+
+          <div class="comparison-table">
+            <div class="comparison-row comparison-head">
+              <div id="compareCol1">Recurso</div>
+              <div>Starter</div>
+              <div>Pro</div>
+              <div>Elite</div>
+            </div>
+
+            <div class="comparison-row">
+              <div id="feature1">Login privado</div>
+              <div>✓</div>
+              <div>✓</div>
+              <div>✓</div>
+            </div>
+
+            <div class="comparison-row">
+              <div id="feature2">Dashboard privado</div>
+              <div>✓</div>
+              <div>✓</div>
+              <div>✓</div>
+            </div>
+
+            <div class="comparison-row">
+              <div id="feature3">Open AARON Panel</div>
+              <div>—</div>
+              <div>✓</div>
+              <div>✓</div>
+            </div>
+
+            <div class="comparison-row">
+              <div id="feature4">Suporte prioritário</div>
+              <div>—</div>
+              <div>—</div>
+              <div>✓</div>
+            </div>
+
+            <div class="comparison-row">
+              <div id="feature5">Expansão premium futura</div>
+              <div>—</div>
+              <div>Base</div>
+              <div>Completa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="card">
+          <h2 id="contactTitle">Contato</h2>
+          <p id="contactLead">Quer definir o plano ideal para seu momento? Vamos conversar.</p>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+            <a class="btn orange" href="mailto:contato@SEU_DOMINIO.com?subject=Subscriptions%20-%20The%20Six%20Seats" id="contactBtn1">Enviar e-mail</a>
+            <a class="btn blue" href="/aaron-login.html" id="contactBtn2">Entrar no AARON</a>
+          </div>
+
+          <p style="margin-top:10px; font-size:12px; color:#64748b;" id="contactNote">
+            Troque o e-mail para o seu domínio real. Depois ligaremos esta página ao Stripe Checkout.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <div class="logo" style="width:32px;height:32px;border-radius:10px;"></div>
+              <div>
+                <strong>The Six Seats Investments</strong><br>
+                <span style="color:#64748b; font-size:12px;" id="footerSub">Clareza • Disciplina • Risco</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fine" id="footerFine">
+            <strong>Disclaimer:</strong> Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal,
+            nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/assets/js/main.js"></script>
+
+  <script>
+    const i18nSubscriptions = {
+      pt: {
+        title: "Subscriptions — The Six Seats",
+        meta: "Planos e subscriptions da plataforma The Six Seats e do acesso ao AARON.",
+        utilityLinks: ["Quem somos", "O que oferecemos", "Contato"],
+        utilityPills: ["Atendimento Premium", "Falar conosco"],
+        nav: ["Home", "Quem somos", "O que oferecemos"],
+        brandSub: "Investments • método e risco",
+        topBtns: ["Login into AARON", "Ver planos"],
+
+        heroTags: ["Planos", "Acesso", "AARON"],
+        heroTitle: "Subscriptions e acesso à plataforma",
+        heroLead: "Escolha o nível de acesso ideal para sua rotina. Comece simples, evolua com estrutura e avance para um ambiente mais completo conforme sua operação cresce.",
+        heroBtns: ["Ver subscriptions", "Entrar no AARON"],
+        heroDisclaimer: "Os preços abaixo são apenas estrutura inicial de apresentação. Depois ligaremos isso ao Stripe real.",
+
+        plansTitle: "Escolha seu plano",
+        plansLead: "Uma estrutura simples, profissional e escalável para acesso à plataforma.",
+
+        starterKicker: "Starter",
+        starterTitle: "Starter Access",
+        starterText: "Para entrar na plataforma, conhecer o fluxo e acessar a base do ambiente.",
+        starterPriceSuffix: "/mês",
+        starterItems: [
+          "Login privado com Google",
+          "Acesso ao dashboard privado",
+          "Estrutura inicial da plataforma",
+          "Pronto para upgrade futuro"
+        ],
+        starterBtn: "Começar",
+
+        featuredBadge: "Mais indicado",
+
+        proKicker: "Pro",
+        proTitle: "Pro AARON Access",
+        proText: "Para quem quer acesso principal à área privada e ao ambiente central do Aaron.",
+        proPriceSuffix: "/mês",
+        proItems: [
+          "Tudo do Starter",
+          "Open AARON Panel",
+          "Ambiente com foco no usuário",
+          "Base para billing e expansão"
+        ],
+        proBtn: "Entrar agora",
+
+        eliteKicker: "Elite",
+        eliteTitle: "Elite Institutional Access",
+        eliteText: "Para uma experiência premium, com prioridade, estrutura expandida e evolução de conta.",
+        elitePriceSuffix: "/mês",
+        eliteItems: [
+          "Tudo do Pro",
+          "Prioridade de suporte",
+          "Base para features premium",
+          "Preparado para gestão avançada"
+        ],
+        eliteBtn: "Falar com a equipe",
+
+        compareTitle: "Comparação rápida",
+        compareCol1: "Recurso",
+        feature1: "Login privado",
+        feature2: "Dashboard privado",
+        feature3: "Open AARON Panel",
+        feature4: "Suporte prioritário",
+        feature5: "Expansão premium futura",
+
+        contactTitle: "Contato",
+        contactLead: "Quer definir o plano ideal para seu momento? Vamos conversar.",
+        contactBtns: ["Enviar e-mail", "Entrar no AARON"],
+        contactNote: "Troque o e-mail para o seu domínio real. Depois ligaremos esta página ao Stripe Checkout.",
+
+        footerSub: "Clareza • Disciplina • Risco",
+        footerFine: "Disclaimer: Conteúdo educacional e informativo. Não constitui aconselhamento financeiro, jurídico ou fiscal, nem recomendação individual de compra/venda. Resultados passados não garantem resultados futuros."
+      },
+
+      en: {
+        title: "Subscriptions — The Six Seats",
+        meta: "Pricing and subscriptions for The Six Seats platform and AARON access.",
+        utilityLinks: ["Who we are", "What we offer", "Contact"],
+        utilityPills: ["Premium Support", "Talk to us"],
+        nav: ["Home", "Who we are", "What we offer"],
+        brandSub: "Investments • method and risk",
+        topBtns: ["Login into AARON", "View plans"],
+
+        heroTags: ["Plans", "Access", "AARON"],
+        heroTitle: "Subscriptions and platform access",
+        heroLead: "Choose the access level that fits your routine. Start simple, evolve with structure, and move into a more complete environment as your operation grows.",
+        heroBtns: ["View subscriptions", "Enter AARON"],
+        heroDisclaimer: "The prices below are only an initial presentation structure. Later we will connect this page to real Stripe billing.",
+
+        plansTitle: "Choose your plan",
+        plansLead: "A simple, professional, and scalable structure for platform access.",
+
+        starterKicker: "Starter",
+        starterTitle: "Starter Access",
+        starterText: "To enter the platform, understand the flow, and access the base environment.",
+        starterPriceSuffix: "/month",
+        starterItems: [
+          "Private Google login",
+          "Private dashboard access",
+          "Initial platform structure",
+          "Ready for future upgrade"
+        ],
+        starterBtn: "Get started",
+
+        featuredBadge: "Most recommended",
+
+        proKicker: "Pro",
+        proTitle: "Pro AARON Access",
+        proText: "For those who want core access to the private area and the main Aaron environment.",
+        proPriceSuffix: "/month",
+        proItems: [
+          "Everything in Starter",
+          "Open AARON Panel",
+          "User-focused environment",
+          "Base for billing and expansion"
+        ],
+        proBtn: "Enter now",
+
+        eliteKicker: "Elite",
+        eliteTitle: "Elite Institutional Access",
+        eliteText: "For a premium experience with priority, expanded structure, and account evolution.",
+        elitePriceSuffix: "/month",
+        eliteItems: [
+          "Everything in Pro",
+          "Priority support",
+          "Base for premium features",
+          "Prepared for advanced management"
+        ],
+        eliteBtn: "Talk to the team",
+
+        compareTitle: "Quick comparison",
+        compareCol1: "Feature",
+        feature1: "Private login",
+        feature2: "Private dashboard",
+        feature3: "Open AARON Panel",
+        feature4: "Priority support",
+        feature5: "Future premium expansion",
+
+        contactTitle: "Contact",
+        contactLead: "Want to define the ideal plan for your current stage? Let's talk.",
+        contactBtns: ["Send email", "Enter AARON"],
+        contactNote: "Replace the email with your real domain. Later we will connect this page to Stripe Checkout.",
+
+        footerSub: "Clarity • Discipline • Risk",
+        footerFine: "Disclaimer: Educational and informational content only. It does not constitute financial, legal, or tax advice, nor an individualized recommendation to buy or sell. Past results do not guarantee future results."
+      }
+    };
+
+    function subSetText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function subSetListTexts(ids, values) {
+      ids.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el && values[i] !== undefined) el.textContent = values[i];
+      });
+    }
+
+    function applySubscriptionsLanguage(lang) {
+      const t = i18nSubscriptions[lang] || i18nSubscriptions.pt;
+
+      document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+      document.title = t.title;
+
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute("content", t.meta);
+
+      const utilityLinks = document.querySelectorAll(".utility-links a");
+      utilityLinks.forEach((el, i) => {
+        if (t.utilityLinks[i] !== undefined) el.textContent = t.utilityLinks[i];
+      });
+
+      subSetText("utilityService", t.utilityPills[0]);
+      subSetText("utilityTalk", t.utilityPills[1]);
+
+      const navLinks = document.querySelectorAll(".nav-links a");
+      navLinks.forEach((el, i) => {
+        if (t.nav[i] !== undefined) el.textContent = t.nav[i];
+      });
+
+      subSetText("brandSub", t.brandSub);
+
+      subSetText("loginBtnTop", t.topBtns[0]);
+      subSetText("compareBtnTop", t.topBtns[1]);
+
+      subSetText("heroTag1", t.heroTags[0]);
+      subSetText("heroTag2", t.heroTags[1]);
+      subSetText("heroTag3", t.heroTags[2]);
+      subSetText("heroTitle", t.heroTitle);
+      subSetText("heroLead", t.heroLead);
+      subSetText("heroBtn1", t.heroBtns[0]);
+      subSetText("heroBtn2", t.heroBtns[1]);
+      subSetText("heroDisclaimer", t.heroDisclaimer);
+
+      subSetText("plansTitle", t.plansTitle);
+      subSetText("plansLead", t.plansLead);
+
+      subSetText("starterKicker", t.starterKicker);
+      subSetText("starterTitle", t.starterTitle);
+      subSetText("starterText", t.starterText);
+      subSetText("monthly1", t.starterPriceSuffix);
+      subSetListTexts(["starterLi1","starterLi2","starterLi3","starterLi4"], t.starterItems);
+      subSetText("starterBtn", t.starterBtn);
+
+      subSetText("featuredBadge", t.featuredBadge);
+
+      subSetText("proKicker", t.proKicker);
+      subSetText("proTitle", t.proTitle);
+      subSetText("proText", t.proText);
+      subSetText("monthly2", t.proPriceSuffix);
+      subSetListTexts(["proLi1","proLi2","proLi3","proLi4"], t.proItems);
+      subSetText("proBtn", t.proBtn);
+
+      subSetText("eliteKicker", t.eliteKicker);
+      subSetText("eliteTitle", t.eliteTitle);
+      subSetText("eliteText", t.eliteText);
+      subSetText("monthly3", t.elitePriceSuffix);
+      subSetListTexts(["eliteLi1","eliteLi2","eliteLi3","eliteLi4"], t.eliteItems);
+      subSetText("eliteBtn", t.eliteBtn);
+
+      subSetText("compareTitle", t.compareTitle);
+      subSetText("compareCol1", t.compareCol1);
+      subSetText("feature1", t.feature1);
+      subSetText("feature2", t.feature2);
+      subSetText("feature3", t.feature3);
+      subSetText("feature4", t.feature4);
+      subSetText("feature5", t.feature5);
+
+      subSetText("contactTitle", t.contactTitle);
+      subSetText("contactLead", t.contactLead);
+      subSetText("contactBtn1", t.contactBtns[0]);
+      subSetText("contactBtn2", t.contactBtns[1]);
+      subSetText("contactNote", t.contactNote);
+
+      subSetText("footerSub", t.footerSub);
+      subSetText("footerFine", t.footerFine);
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+
+      localStorage.setItem("siteLanguage", lang);
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        applySubscriptionsLanguage(btn.dataset.lang);
+      });
+    });
+
+    applySubscriptionsLanguage(localStorage.getItem("siteLanguage") || "pt");
+  </script>
+</body>
+</html>
