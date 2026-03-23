@@ -13,6 +13,7 @@ const firebaseConfig = {
   messagingSenderId: "678216895700",
   appId: "1:678216895700:web:2836323ab00f058ae07f41"
 };
+const AARON_PANEL_URL = "https://aaron9-panel.vercel.app/panel.html";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -76,7 +77,7 @@ function bindSettingsButton(button) {
 function bindOpenPanelButton(button) {
   if (!button) return;
   button.addEventListener('click', () => {
-    updatePanelStatus('Next step: connect the real AARON panel URL for this user.', 'success');
+    window.location.href = AARON_PANEL_URL;
   });
 }
 
