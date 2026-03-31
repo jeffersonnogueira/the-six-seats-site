@@ -1,0 +1,8 @@
+{
+  "name": "the-six-seats-site",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "stripe": "^21.0.1"
+  }
+}
