@@ -19,13 +19,26 @@ const firebaseConfig = {
   appId: '1:678216895700:web:2836323ab00f058ae07f41'
 };
 
+const FIRESTORE_DATABASE_ID = 'aaron-access';
+const ACCESS_COLLECTION = 'aaron_access';
 const AARON_PANEL_URL = 'https://aaron9-panel.vercel.app/panel.html';
 const PLANS_BILLING_URL = '/subscriptions';
-const ACCESS_COLLECTION = 'aaron_access';
+const SETTINGS_URL = '/aaron-settings.html';
+
+const DEFAULT_NO_ACCESS_PROFILE = {
+  plan: 'No active subscription',
+  panelAccess: false,
+  dashboardAccess: false,
+  accessLabel: 'Subscription required',
+  workspace: 'Plans & Billing required',
+  symbol: 'NVDA',
+  timeframe: '1m',
+  statusLabel: 'Billing Required'
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app, 'aaron-access');
+const db = getFirestore(app, FIRESTORE_DATABASE_ID);
 
 const welcomeName = document.getElementById('welcomeName');
 const appStatus = document.getElementById('appStatus');
@@ -55,25 +68,8 @@ const settingsBtn = document.getElementById('settingsBtn');
 const settingsBtnHero = document.getElementById('settingsBtnHero');
 const settingsBtnBottom = document.getElementById('settingsBtnBottom');
 
-const plansBillingButtons = [
-  document.getElementById('plansBillingBtn'),
-  document.getElementById('plansBillingBtnHero'),
-  document.getElementById('plansBillingBtnBottom')
-].filter(Boolean);
-
-const DEFAULT_ACCESS_PROFILE = {
-  plan: 'No active subscription',
-  panelAccess: false,
-  dashboardAccess: true,
-  accessLabel: 'Subscription required',
-  workspace: 'Plans & Billing required',
-  symbol: 'NVDA',
-  timeframe: '1m',
-  subscriptionStatus: 'inactive',
-  createdAtLabel: 'Waiting for account access profile'
-};
-
-let currentAccessProfile = { ...DEFAULT_ACCESS_PROFILE };
+let currentUser = null;
+let currentAccessProfile = { ...DEFAULT_NO_ACCESS_PROFILE };
 
 function updatePanelStatus(message, type = 'neutral') {
   if (!appStatus) return;
@@ -89,21 +85,66 @@ function setText(el, value) {
   if (el) el.textContent = value;
 }
 
+function normalizeProfile(data) {
+  const plan = String(data?.plan || DEFAULT_NO_ACCESS_PROFILE.plan);
+  const panelAccess = Boolean(data?.panelAccess);
+  const dashboardAccess = data?.dashboardAccess === undefined ? true : Boolean(data.dashboardAccess);
+  const workspace = String(
+    data?.workspace ||
+    (panelAccess ? 'Private AARON Workspace' : DEFAULT_NO_ACCESS_PROFILE.workspace)
+  );
+  const symbol = String(data?.symbol || DEFAULT_NO_ACCESS_PROFILE.symbol).trim().toUpperCase();
+  const timeframe = String(data?.timeframe || DEFAULT_NO_ACCESS_PROFILE.timeframe).trim();
+  const subscriptionStatus = String(data?.subscriptionStatus || 'inactive');
+
+  return {
+    plan,
+    panelAccess,
+    dashboardAccess,
+    workspace,
+    symbol: symbol || DEFAULT_NO_ACCESS_PROFILE.symbol,
+    timeframe: timeframe || DEFAULT_NO_ACCESS_PROFILE.timeframe,
+    subscriptionStatus,
+    accessLabel: panelAccess ? 'Private Access Active' : 'Subscription required',
+    statusLabel: panelAccess ? 'Active' : 'Billing Required'
+  };
+}
+
+async function loadAccessProfile(uid) {
+  const ref = doc(db, ACCESS_COLLECTION, uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) {
+    throw new Error('Access profile not found in Firestore.');
+  }
+
+  return normalizeProfile(snap.data());
+}
+
 function goToPlansBilling() {
   window.location.href = PLANS_BILLING_URL;
+}
+
+function goToSettings() {
+  window.location.href = SETTINGS_URL;
+}
+
+function buildPanelUrl() {
+  const url = new URL(AARON_PANEL_URL);
+  url.searchParams.set('symbol', currentAccessProfile.symbol || DEFAULT_NO_ACCESS_PROFILE.symbol);
+  url.searchParams.set('timeframe', currentAccessProfile.timeframe || DEFAULT_NO_ACCESS_PROFILE.timeframe);
+
+  if (currentUser?.uid) {
+    url.searchParams.set('uid', currentUser.uid);
+  }
+
+  return url.toString();
 }
 
 function bindSettingsButton(button) {
   if (!button) return;
   button.addEventListener('click', () => {
-    updatePanelStatus('Next step: connect a real settings page for symbol, timeframe and plan.');
-  });
-}
-
-function bindPlansBillingButton(button) {
-  if (!button) return;
-  button.addEventListener('click', () => {
-    goToPlansBilling();
+    goToSettings();
   });
 }
 
@@ -119,7 +160,7 @@ function bindOpenPanelButton(button) {
       return;
     }
 
-    window.location.href = AARON_PANEL_URL;
+    window.location.href = buildPanelUrl();
   });
 }
 
@@ -141,115 +182,46 @@ function refreshActionButtons() {
   });
 }
 
-function formatTimestamp(value) {
-  try {
-    if (!value) return '';
-
-    if (typeof value.toDate === 'function') {
-      return value.toDate().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    }
-
-    if (value.seconds) {
-      return new Date(value.seconds * 1000).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    }
-
-    const parsed = new Date(value);
-    if (!Number.isNaN(parsed.getTime())) {
-      return parsed.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    }
-  } catch (error) {
-    console.warn('Timestamp formatting warning:', error);
-  }
-
-  return '';
-}
-
-function normalizeAccessProfile(data = {}) {
-  const dashboardAccess = data.dashboardAccess !== false;
-  const panelAccess = Boolean(data.panelAccess);
-  const plan = String(data.plan || DEFAULT_ACCESS_PROFILE.plan);
-  const subscriptionStatus = String(data.subscriptionStatus || DEFAULT_ACCESS_PROFILE.subscriptionStatus);
-  const workspace = String(
-    data.workspace || (panelAccess ? 'Private AARON Workspace' : 'Plans & Billing required')
-  );
-  const symbol = String(data.symbol || DEFAULT_ACCESS_PROFILE.symbol);
-  const timeframe = String(data.timeframe || DEFAULT_ACCESS_PROFILE.timeframe);
-
-  let accessLabel = 'Subscription required';
-  if (panelAccess) {
-    accessLabel = 'Private Access Active';
-  } else if (dashboardAccess) {
-    accessLabel = 'Dashboard Access Active';
-  }
-
-  const createdAtLabel = formatTimestamp(data.createdAt || data.updatedAt) || 'Access profile loaded';
-
-  return {
-    plan,
-    panelAccess,
-    dashboardAccess,
-    accessLabel,
-    workspace,
-    symbol,
-    timeframe,
-    subscriptionStatus,
-    createdAtLabel
-  };
-}
-
-async function loadAccessProfile(uid) {
-  const ref = doc(db, ACCESS_COLLECTION, uid);
-  const snapshot = await getDoc(ref);
-
-  if (!snapshot.exists()) {
-    return null;
-  }
-
-  return normalizeAccessProfile(snapshot.data());
-}
-
-function renderUserState(user, accessProfile) {
+function renderUser(user, profile) {
   const name = user.displayName || 'User';
   const email = user.email || 'No email available';
-
-  currentAccessProfile = accessProfile || { ...DEFAULT_ACCESS_PROFILE };
+  const createdAt = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
   setText(welcomeName, `Welcome, ${name}`);
+
+  if (profile.panelAccess) {
+    updatePanelStatus(
+      `Authentication active. Firestore profile loaded. Panel ready for ${profile.symbol} · ${profile.timeframe}.`,
+      'success'
+    );
+  } else {
+    updatePanelStatus(
+      'Authentication active, but subscription is required for panel access.',
+      'error'
+    );
+  }
+
   setText(accountName, name);
   setText(accountEmail, email);
 
-  setText(planValue, currentAccessProfile.plan);
-  setText(accessValue, currentAccessProfile.accessLabel);
-  setText(workspaceValue, currentAccessProfile.workspace);
-  setText(createdValue, currentAccessProfile.createdAtLabel);
+  setText(planValue, profile.plan);
+  setText(accessValue, profile.accessLabel);
+  setText(workspaceValue, profile.workspace);
+  setText(createdValue, `Workspace prepared on ${createdAt}`);
 
-  setText(symbolValue, currentAccessProfile.symbol);
-  setText(timeframeValue, currentAccessProfile.timeframe);
-  setText(statusValue, currentAccessProfile.panelAccess ? 'Active' : 'Billing Required');
+  setText(symbolValue, profile.symbol);
+  setText(timeframeValue, profile.timeframe);
+  setText(statusValue, profile.statusLabel);
 
   setText(snapshotName, name);
   setText(snapshotEmail, email);
-  setText(snapshotPlan, currentAccessProfile.plan);
-  setText(snapshotSymbol, currentAccessProfile.symbol);
-  setText(snapshotTimeframe, currentAccessProfile.timeframe);
-
-  if (currentAccessProfile.panelAccess) {
-    updatePanelStatus('Authentication active. Firestore access profile loaded. Panel access is active.', 'success');
-  } else {
-    updatePanelStatus('Authentication active, but subscription is required for panel access.', 'error');
-  }
+  setText(snapshotPlan, profile.plan);
+  setText(snapshotSymbol, profile.symbol);
+  setText(snapshotTimeframe, profile.timeframe);
 
   refreshActionButtons();
 }
@@ -260,29 +232,43 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  currentUser = user;
+
   try {
-    updatePanelStatus('Authentication active. Loading Firestore access profile...');
+    currentAccessProfile = await loadAccessProfile(user.uid);
 
-    const accessProfile = await loadAccessProfile(user.uid);
-
-    if (!accessProfile) {
-      renderUserState(user, {
-        ...DEFAULT_ACCESS_PROFILE,
-        createdAtLabel: 'No Firestore access profile found for this account'
-      });
+    if (!currentAccessProfile.dashboardAccess) {
+      updatePanelStatus('Authenticated, but dashboard access is disabled for this account.', 'error');
+      goToPlansBilling();
       return;
     }
 
-    renderUserState(user, accessProfile);
+    renderUser(user, currentAccessProfile);
   } catch (error) {
     console.error(error);
+    currentAccessProfile = { ...DEFAULT_NO_ACCESS_PROFILE };
 
-    renderUserState(user, {
-      ...DEFAULT_ACCESS_PROFILE,
-      createdAtLabel: 'Access profile could not be loaded'
-    });
+    setText(welcomeName, `Welcome, ${user.displayName || 'User'}`);
+    setText(accountName, user.displayName || 'User');
+    setText(accountEmail, user.email || 'No email available');
+    setText(planValue, currentAccessProfile.plan);
+    setText(accessValue, currentAccessProfile.accessLabel);
+    setText(workspaceValue, currentAccessProfile.workspace);
+    setText(symbolValue, currentAccessProfile.symbol);
+    setText(timeframeValue, currentAccessProfile.timeframe);
+    setText(statusValue, currentAccessProfile.statusLabel);
+    setText(snapshotName, user.displayName || 'User');
+    setText(snapshotEmail, user.email || 'No email available');
+    setText(snapshotPlan, currentAccessProfile.plan);
+    setText(snapshotSymbol, currentAccessProfile.symbol);
+    setText(snapshotTimeframe, currentAccessProfile.timeframe);
 
-    updatePanelStatus('Authenticated, but Firestore access profile could not be read. Check Rules and document path.', 'error');
+    updatePanelStatus(
+      'Authenticated, but Firestore access profile could not be read. Check Rules, database ID, and document path.',
+      'error'
+    );
+
+    refreshActionButtons();
   }
 });
 
@@ -304,5 +290,3 @@ bindOpenPanelButton(openPanelBtnBottom);
 bindSettingsButton(settingsBtn);
 bindSettingsButton(settingsBtnHero);
 bindSettingsButton(settingsBtnBottom);
-
-plansBillingButtons.forEach(bindPlansBillingButton);
