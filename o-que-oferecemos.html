@@ -85,7 +85,7 @@
     <section class="section" id="pacotes">
   <div class="container">
     <h2 class="section-title">Níveis de acesso</h2>
-    <p>Faça login para ver pricing atual e disponibilidade dos planos.</p>
+    <p>Escolha um plano e finalize a assinatura sem sair do site.</p>
 
     <div class="grid-3">
       <div class="card">
@@ -98,11 +98,11 @@
         </ul>
 
         <p class="price-note" style="margin-top:14px; font-size:12px; color:#64748b;">
-          Faça login para ver o preço.
+          Checkout seguro dentro do site.
         </p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
-          <a class="btn blue card-login-btn" href="/aaron-login.html">Faça login para ver os preços da assinatura</a>
+          <button class="btn blue card-login-btn plan-subscribe-btn" type="button" data-plan="starter">Assinar Starter</button>
         </div>
       </div>
 
@@ -120,11 +120,11 @@
         </ul>
 
         <p class="price-note" style="margin-top:14px; font-size:12px; color:#64748b;">
-          Faça login para ver o preço.
+          Checkout seguro dentro do site.
         </p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
-          <a class="btn blue card-login-btn" href="/aaron-login.html">Faça login para ver os preços da assinatura</a>
+          <button class="btn blue card-login-btn plan-subscribe-btn" type="button" data-plan="pro">Assinar Pro</button>
         </div>
       </div>
 
@@ -138,16 +138,37 @@
         </ul>
 
         <p class="price-note" style="margin-top:14px; font-size:12px; color:#64748b;">
-          Faça login para ver o preço.
+          Checkout seguro dentro do site.
         </p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
-          <a class="btn blue card-login-btn" href="/aaron-login.html">Faça login para ver os preços da assinatura</a>
+          <button class="btn blue card-login-btn plan-subscribe-btn" type="button" data-plan="elite">Assinar Elite</button>
         </div>
       </div>
     </div>
   </div>
+
 </section>
+
+    <section class="section" id="checkout-section" style="display:none;">
+      <div class="container">
+        <div class="card">
+          <div class="kicker">
+            <span class="tag blue">Stripe</span>
+            <span class="tag orange">Checkout</span>
+            <span class="tag">Embedded</span>
+          </div>
+
+          <h2>Finalizar assinatura</h2>
+          <p style="margin-bottom:16px;">
+            Pagamento seguro dentro do site. Você não sai da página para concluir a assinatura.
+          </p>
+
+          <div id="checkout-status" style="margin-bottom:14px; color:#475569;"></div>
+          <div id="checkout" style="min-height:700px;"></div>
+        </div>
+      </div>
+
 
     <section class="section" id="como-funciona">
       <div class="container">
@@ -218,6 +239,81 @@
 
   <script src="/assets/js/main.js"></script>
 
+
+<script src="https://js.stripe.com/clover/stripe.js"></script>
+<script>
+  const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TFxqVHTeLq64Ep1eg1nVcw63Uwu8NHpewoLkoSmi5aMK4533zLiQbbJg9A0n6YHp7JVYTStjVWtrlD62QToGrYP00jvqcMMLX';
+  const stripe = window.Stripe ? Stripe(STRIPE_PUBLISHABLE_KEY) : null;
+  let currentCheckout = null;
+
+  async function mountEmbeddedCheckout(plan) {
+    const checkoutSection = document.getElementById('checkout-section');
+    const checkoutStatus = document.getElementById('checkout-status');
+    const checkoutContainer = document.getElementById('checkout');
+
+    checkoutSection.style.display = 'block';
+    checkoutStatus.textContent = 'Preparing secure checkout...';
+    checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (!stripe || STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH_YOUR_PUBLISHABLE_KEY')) {
+      checkoutStatus.textContent = 'Add your real pk_test_ or pk_live_ key in this file before using embedded checkout.';
+      return;
+    }
+
+    if (currentCheckout) {
+      try {
+        currentCheckout.destroy();
+      } catch (error) {
+        console.warn('Embedded checkout cleanup warning:', error);
+      }
+      checkoutContainer.innerHTML = '';
+    }
+
+    const fetchClientSecret = async () => {
+      const response = await fetch('/api/create-subscription-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ plan })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      return data.clientSecret;
+    };
+
+    try {
+      currentCheckout = await stripe.initEmbeddedCheckout({
+        fetchClientSecret,
+        onComplete: () => {
+          checkoutStatus.textContent = 'Payment completed. We are finalizing your access.';
+        }
+      });
+
+      currentCheckout.mount('#checkout');
+      checkoutStatus.textContent = 'Secure checkout ready.';
+    } catch (error) {
+      console.error(error);
+      checkoutStatus.textContent = error.message || 'Failed to load checkout.';
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('.plan-subscribe-btn');
+    if (!button) return;
+
+    const plan = button.dataset.plan;
+    if (!plan) return;
+
+    mountEmbeddedCheckout(plan);
+  });
+</script>
+
 <script>
   const i18nOferecemos = {
     pt: {
@@ -231,7 +327,7 @@
       heroTitle: "O que oferecemos",
       heroLead: "Um pacote premium de educação + processo + ferramentas para operar com consistência. Você ajusta o nível de profundidade conforme seu momento.",
       packagesTitle: "Níveis de assinatura",
-      packagesLead: "Faça login para ver os preços da assinatura e a disponibilidade dos planos.",
+      packagesLead: "Escolha um plano e finalize a assinatura sem sair do site.",
       packageCards: [
   {
     title: "Starter Access",
@@ -241,8 +337,8 @@
       "Acesso ao dashboard privado",
       "Estrutura inicial da plataforma"
     ],
-    note: "Faça login para ver os preços da assinatura.",
-    button: "Faça login para ver os preços da assinatura"
+    note: "Checkout seguro dentro do site.",
+    button: "Assinar Starter"
   },
   {
     badge: "Mais indicado",
@@ -253,8 +349,8 @@
       "Open AARON Panel",
       "Ambiente com foco no usuário"
     ],
-    note: "Faça login para ver os preços da assinatura.",
-    button: "Faça login para ver os preços da assinatura"
+    note: "Checkout seguro dentro do site.",
+    button: "Assinar Pro"
   },
   {
     title: "Elite Institutional Access",
@@ -264,8 +360,8 @@
       "Prioridade de suporte",
       "Base para features premium"
     ],
-    note: "Faça login para ver os preços da assinatura.",
-    button: "Faça login para ver os preços da assinatura"
+    note: "Checkout seguro dentro do site.",
+    button: "Assinar Elite"
   }
 ],
       howTitle: "Como funciona",
@@ -301,7 +397,7 @@
       heroLead: "A premium package of education + process + tools to operate with consistency. You adjust the level of depth according to your moment.",
       packagesTitle: "Packages (positioning example)",
       packagesTitle: "Access levels",
-packagesLead: "Log in to view current pricing and plan availability.",
+packagesLead: "Choose a plan and complete the subscription without leaving the site.",
 packageCards: [
   {
     title: "Starter Access",
@@ -311,8 +407,8 @@ packageCards: [
       "Private dashboard access",
       "Initial platform structure"
     ],
-    note: "Log in to view pricing.",
-    button: "Log in to view pricing"
+    note: "Secure checkout inside the site.",
+    button: "Subscribe Starter"
   },
   {
     badge: "Most recommended",
@@ -323,8 +419,8 @@ packageCards: [
       "Open AARON Panel",
       "User-focused environment"
     ],
-    note: "Log in to view pricing.",
-    button: "Log in to view pricing"
+    note: "Secure checkout inside the site.",
+    button: "Subscribe Pro"
   },
   {
     title: "Elite Institutional Access",
@@ -334,8 +430,8 @@ packageCards: [
       "Priority support",
       "Base for premium features"
     ],
-    note: "Log in to view pricing.",
-    button: "Log in to view pricing"
+    note: "Secure checkout inside the site.",
+    button: "Subscribe Elite"
   }
 ],
       howTitle: "How it works",
