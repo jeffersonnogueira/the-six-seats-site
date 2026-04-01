@@ -89,7 +89,7 @@
           </div>
 
           <div class="disclaimer" id="heroDisclaimer">
-            Os preços abaixo são apenas estrutura inicial de apresentação. Depois ligaremos isso ao Stripe real.
+            Escolha um plano abaixo e finalize a assinatura sem sair desta página.
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@
     <section class="section" id="plans">
       <div class="container">
         <h2 class="section-title" id="plansTitle">Escolha seu plano</h2>
-        <p id="plansLead">Uma estrutura simples, profissional e escalável para acesso à plataforma.</p>
+        <p id="plansLead">Clique em um plano abaixo para abrir o checkout seguro dentro do site.</p>
 
         <div class="subscriptions-grid">
           <div class="subscription-card">
@@ -121,7 +121,7 @@
               <li id="starterLi4">Pronto para upgrade futuro</li>
             </ul>
 
-            <a class="btn ghost subscription-btn" href="/aaron-login.html" id="starterBtn">Começar</a>
+            <button class="btn ghost subscription-btn plan-subscribe-btn" type="button" data-plan="starter" id="starterBtn">Assinar Starter</button>
           </div>
 
           <div class="subscription-card featured">
@@ -146,7 +146,7 @@
               <li id="proLi4">Base para billing e expansão</li>
             </ul>
 
-            <a class="btn blue subscription-btn" href="/aaron-login.html" id="proBtn">Entrar agora</a>
+            <button class="btn blue subscription-btn plan-subscribe-btn" type="button" data-plan="pro" id="proBtn">Assinar Pro</button>
           </div>
 
           <div class="subscription-card">
@@ -169,8 +169,28 @@
               <li id="eliteLi4">Preparado para gestão avançada</li>
             </ul>
 
-            <a class="btn ghost subscription-btn" href="#contato" id="eliteBtn">Falar com a equipe</a>
+            <button class="btn ghost subscription-btn plan-subscribe-btn" type="button" data-plan="elite" id="eliteBtn">Assinar Elite</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="checkout-section" style="display:none;">
+      <div class="container">
+        <div class="card">
+          <div class="kicker">
+            <span class="tag blue" id="checkoutTag1">Stripe</span>
+            <span class="tag orange" id="checkoutTag2">Checkout</span>
+            <span class="tag" id="checkoutTag3">Embedded</span>
+          </div>
+
+          <h2 id="checkoutTitle">Finalizar assinatura</h2>
+          <p id="checkoutLead" style="margin-bottom:16px;">
+            Pagamento seguro dentro do site. Você não sai da página para concluir a assinatura.
+          </p>
+
+          <div id="checkout-status" style="margin-bottom:14px; color:#475569;"></div>
+          <div id="checkout" style="min-height:700px;"></div>
         </div>
       </div>
     </section>
@@ -268,6 +288,104 @@
   </main>
 
   <script src="/assets/js/main.js"></script>
+  <script src="https://js.stripe.com/clover/stripe.js"></script>
+
+  <script>
+    const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TFxqVHTeLq64Ep1eg1nVcw63Uwu8NHpewoLkoSmi5aMK4533zLiQbbJg9A0n6YHp7JVYTStjVWtrlD62QToGrYP00jvqcMMLX';
+    const stripe = window.Stripe ? Stripe(STRIPE_PUBLISHABLE_KEY) : null;
+    let currentCheckout = null;
+
+    const checkoutI18n = {
+      pt: {
+        preparing: 'Preparando checkout seguro...',
+        missingKey: 'Adicione sua chave pública real do Stripe nesta página antes de usar o checkout.',
+        ready: 'Checkout seguro carregado.',
+        completed: 'Pagamento concluído. Estamos finalizando seu acesso.',
+        failed: 'Não foi possível carregar o checkout.'
+      },
+      en: {
+        preparing: 'Preparing secure checkout...',
+        missingKey: 'Add your real Stripe publishable key in this page before using checkout.',
+        ready: 'Secure checkout loaded.',
+        completed: 'Payment completed. We are finalizing your access.',
+        failed: 'Failed to load checkout.'
+      }
+    };
+
+    function currentLang() {
+      const lang = localStorage.getItem('siteLanguage') || 'pt';
+      return lang === 'en' ? 'en' : 'pt';
+    }
+
+    async function mountEmbeddedCheckout(plan) {
+      const lang = currentLang();
+      const t = checkoutI18n[lang];
+      const checkoutSection = document.getElementById('checkout-section');
+      const checkoutStatus = document.getElementById('checkout-status');
+      const checkoutContainer = document.getElementById('checkout');
+
+      checkoutSection.style.display = 'block';
+      checkoutStatus.textContent = t.preparing;
+      checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (!stripe) {
+        checkoutStatus.textContent = t.missingKey;
+        return;
+      }
+
+      if (currentCheckout) {
+        try {
+          currentCheckout.destroy();
+        } catch (error) {
+          console.warn('Embedded checkout cleanup warning:', error);
+        }
+        checkoutContainer.innerHTML = '';
+      }
+
+      const fetchClientSecret = async () => {
+        const response = await fetch('/api/create-subscription-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ plan })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || t.failed);
+        }
+
+        return data.clientSecret;
+      };
+
+      try {
+        currentCheckout = await stripe.initEmbeddedCheckout({
+          fetchClientSecret,
+          onComplete: () => {
+            checkoutStatus.textContent = t.completed;
+          }
+        });
+
+        currentCheckout.mount('#checkout');
+        checkoutStatus.textContent = t.ready;
+      } catch (error) {
+        console.error(error);
+        checkoutStatus.textContent = error.message || t.failed;
+      }
+    }
+
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('.plan-subscribe-btn');
+      if (!button) return;
+
+      const plan = button.dataset.plan;
+      if (!plan) return;
+
+      mountEmbeddedCheckout(plan);
+    });
+  </script>
 
   <script>
     const i18nSubscriptions = {
@@ -284,10 +402,10 @@
         heroTitle: "Subscriptions e acesso à plataforma",
         heroLead: "Escolha o nível de acesso ideal para sua rotina. Comece simples, evolua com estrutura e avance para um ambiente mais completo conforme sua operação cresce.",
         heroBtns: ["Ver subscriptions", "Entrar no AARON"],
-        heroDisclaimer: "Os preços abaixo são apenas estrutura inicial de apresentação. Depois ligaremos isso ao Stripe real.",
+        heroDisclaimer: "Escolha um plano abaixo e finalize a assinatura sem sair desta página.",
 
         plansTitle: "Escolha seu plano",
-        plansLead: "Uma estrutura simples, profissional e escalável para acesso à plataforma.",
+        plansLead: "Clique em um plano abaixo para abrir o checkout seguro dentro do site.",
 
         starterKicker: "Starter",
         starterTitle: "Starter Access",
@@ -299,7 +417,7 @@
           "Estrutura inicial da plataforma",
           "Pronto para upgrade futuro"
         ],
-        starterBtn: "Começar",
+        starterBtn: "Assinar Starter",
 
         featuredBadge: "Mais indicado",
 
@@ -313,7 +431,7 @@
           "Ambiente com foco no usuário",
           "Base para billing e expansão"
         ],
-        proBtn: "Entrar agora",
+        proBtn: "Assinar Pro",
 
         eliteKicker: "Elite",
         eliteTitle: "Elite Institutional Access",
@@ -325,7 +443,11 @@
           "Base para features premium",
           "Preparado para gestão avançada"
         ],
-        eliteBtn: "Falar com a equipe",
+        eliteBtn: "Assinar Elite",
+
+        checkoutTags: ["Stripe", "Checkout", "Embedded"],
+        checkoutTitle: "Finalizar assinatura",
+        checkoutLead: "Pagamento seguro dentro do site. Você não sai da página para concluir a assinatura.",
 
         compareTitle: "Comparação rápida",
         compareCol1: "Recurso",
@@ -357,10 +479,10 @@
         heroTitle: "Subscriptions and platform access",
         heroLead: "Choose the access level that fits your routine. Start simple, evolve with structure, and move into a more complete environment as your operation grows.",
         heroBtns: ["View subscriptions", "Enter AARON"],
-        heroDisclaimer: "The prices below are only an initial presentation structure. Later we will connect this page to real Stripe billing.",
+        heroDisclaimer: "Choose a plan below and complete the subscription without leaving this page.",
 
         plansTitle: "Choose your plan",
-        plansLead: "A simple, professional, and scalable structure for platform access.",
+        plansLead: "Click one of the plans below to open the secure checkout inside the site.",
 
         starterKicker: "Starter",
         starterTitle: "Starter Access",
@@ -372,7 +494,7 @@
           "Initial platform structure",
           "Ready for future upgrade"
         ],
-        starterBtn: "Get started",
+        starterBtn: "Subscribe Starter",
 
         featuredBadge: "Most recommended",
 
@@ -386,7 +508,7 @@
           "User-focused environment",
           "Base for billing and expansion"
         ],
-        proBtn: "Enter now",
+        proBtn: "Subscribe Pro",
 
         eliteKicker: "Elite",
         eliteTitle: "Elite Institutional Access",
@@ -398,7 +520,11 @@
           "Base for premium features",
           "Prepared for advanced management"
         ],
-        eliteBtn: "Talk to the team",
+        eliteBtn: "Subscribe Elite",
+
+        checkoutTags: ["Stripe", "Checkout", "Embedded"],
+        checkoutTitle: "Complete subscription",
+        checkoutLead: "Secure payment inside the site. You do not leave the page to complete the subscription.",
 
         compareTitle: "Quick comparison",
         compareCol1: "Feature",
@@ -491,6 +617,12 @@
       subSetText("monthly3", t.elitePriceSuffix);
       subSetListTexts(["eliteLi1","eliteLi2","eliteLi3","eliteLi4"], t.eliteItems);
       subSetText("eliteBtn", t.eliteBtn);
+
+      subSetText("checkoutTag1", t.checkoutTags[0]);
+      subSetText("checkoutTag2", t.checkoutTags[1]);
+      subSetText("checkoutTag3", t.checkoutTags[2]);
+      subSetText("checkoutTitle", t.checkoutTitle);
+      subSetText("checkoutLead", t.checkoutLead);
 
       subSetText("compareTitle", t.compareTitle);
       subSetText("compareCol1", t.compareCol1);
