@@ -9,7 +9,6 @@
 </head>
 <body>
 
-  <!-- Top utility -->
   <div class="top-utility">
     <div class="container">
       <div class="utility-row">
@@ -26,7 +25,6 @@
     </div>
   </div>
 
-  <!-- Main header -->
   <header class="header">
     <div class="container">
       <div class="navbar">
@@ -81,7 +79,7 @@
             <ul class="aaron-benefits">
               <li>Seu painel individual</li>
               <li>Seu ambiente e preferências</li>
-              <li>Acesso futuro com Google Account</li>
+              <li>Acesso com Google Account</li>
               <li>Experiência premium e organizada</li>
             </ul>
           </div>
@@ -96,19 +94,23 @@
             </div>
 
             <div class="aaron-login-actions">
-  <button class="btn aaron-google-btn" id="googleLoginBtn" type="button">
-    <span class="google-icon">G</span>
-    Login with your Google account
-  </button>
+              <button class="btn aaron-google-btn" type="button" id="googleLoginBtn">
+                <span class="google-icon">G</span>
+                Login with your Google account
+              </button>
 
-  <button class="btn blue aaron-enter-btn" id="continueBtn" type="button">
-    Continue to secure access
-  </button>
-</div>
+              <button class="btn blue aaron-enter-btn" type="button" id="continueBtn">
+                Continue to secure access
+              </button>
+            </div>
 
-<div class="aaron-login-note" id="loginStatus">
-  Sign in with Google to activate secure access.
-</div>
+            <div id="loginStatus" style="margin-top:16px; font-size:14px; line-height:1.6; color:#64748b;">
+              Sign in with Google to activate secure access.
+            </div>
+
+            <div class="aaron-login-note">
+              Depois do login, o sistema abre seu dashboard privado. O painel do AARON será liberado conforme o plano salvo no Firestore.
+            </div>
           </div>
         </div>
       </div>
@@ -116,6 +118,6 @@
   </main>
 
   <script src="/assets/js/main.js"></script>
-<script type="module" src="/assets/js/aaron-auth.js"></script>
+  <script type="module" src="/assets/js/aaron-auth.js"></script>
 </body>
 </html>

@@ -7,12 +7,12 @@ import {
 } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB706VVHU7K0nFl_3c-I3G3w1riHlyOE0o",
-  authDomain: "sixseats-aaron.firebaseapp.com",
-  projectId: "sixseats-aaron",
-  storageBucket: "sixseats-aaron.firebasestorage.app",
-  messagingSenderId: "678216895700",
-  appId: "1:678216895700:web:2836323ab00f058ae07f41"
+  apiKey: 'AIzaSyB706VVHU7K0nFl_3c-I3G3w1riHlyOE0o',
+  authDomain: 'sixseats-aaron.firebaseapp.com',
+  projectId: 'sixseats-aaron',
+  storageBucket: 'sixseats-aaron.firebasestorage.app',
+  messagingSenderId: '678216895700',
+  appId: '1:678216895700:web:2836323ab00f058ae07f41'
 };
 
 const app = initializeApp(firebaseConfig);
@@ -51,6 +51,7 @@ function setSignedInUI(user) {
 
 function setSignedOutUI() {
   setStatus('Sign in with Google to activate secure access.');
+
   if (continueBtn) {
     continueBtn.textContent = 'Continue to secure access';
   }
