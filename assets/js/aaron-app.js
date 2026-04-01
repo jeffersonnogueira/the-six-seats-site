@@ -25,7 +25,7 @@ const ACCESS_COLLECTION = 'aaron_access';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = getFirestore(app, 'aaron-access');
 
 const welcomeName = document.getElementById('welcomeName');
 const appStatus = document.getElementById('appStatus');
