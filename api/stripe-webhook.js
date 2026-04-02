@@ -1,7 +1,7 @@
-const Stripe = require('stripe');
-const { getApps, getApp, initializeApp, cert } = require('firebase-admin/app');
-const { getFirestore, FieldValue } = require('firebase-admin/firestore');
-const { getAuth } = require('firebase-admin/auth');
+import Stripe from 'stripe';
+import { getApps, getApp, initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore, FieldValue } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -27,22 +27,18 @@ function getDb() {
 
 function getPlanFromPriceId(priceId) {
   if (!priceId) return null;
-
   if (priceId === process.env.STRIPE_PRICE_STARTER) return 'Starter Access';
   if (priceId === process.env.STRIPE_PRICE_PRO) return 'Pro AARON Access';
   if (priceId === process.env.STRIPE_PRICE_ELITE) return 'Elite Institutional Access';
-
   return null;
 }
 
 function getPlanFromMetadata(plan) {
   const raw = String(plan || '').trim().toLowerCase();
-
   if (raw === 'starter' || raw === 'starter access') return 'Starter Access';
   if (raw === 'pro' || raw === 'pro aaron access') return 'Pro AARON Access';
   if (raw === 'elite' || raw === 'elite institutional access') return 'Elite Institutional Access';
   if (raw === 'founder' || raw === 'founder access') return 'Founder Access';
-
   return null;
 }
 
@@ -95,7 +91,6 @@ function readRawBody(req) {
 async function getUserRefByEmail(email) {
   const auth = getAuth(getFirebaseApp());
   const db = getDb();
-
   const userRecord = await auth.getUserByEmail(email);
   return db.collection(ACCESS_COLLECTION).doc(userRecord.uid);
 }
@@ -104,22 +99,12 @@ async function getUserRefByStripeIds({ customerId, subscriptionId }) {
   const db = getDb();
 
   if (subscriptionId) {
-    const bySub = await db
-      .collection(ACCESS_COLLECTION)
-      .where('stripeSubscriptionId', '==', subscriptionId)
-      .limit(1)
-      .get();
-
+    const bySub = await db.collection(ACCESS_COLLECTION).where('stripeSubscriptionId', '==', subscriptionId).limit(1).get();
     if (!bySub.empty) return bySub.docs[0].ref;
   }
 
   if (customerId) {
-    const byCustomer = await db
-      .collection(ACCESS_COLLECTION)
-      .where('stripeCustomerId', '==', customerId)
-      .limit(1)
-      .get();
-
+    const byCustomer = await db.collection(ACCESS_COLLECTION).where('stripeCustomerId', '==', customerId).limit(1).get();
     if (!byCustomer.empty) return byCustomer.docs[0].ref;
   }
 
@@ -174,7 +159,7 @@ async function updateAccessByRef(ref, { plan, customerId, subscriptionId, subscr
   );
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).send('Method not allowed');
@@ -185,7 +170,6 @@ module.exports = async function handler(req, res) {
   try {
     const rawBody = await readRawBody(req);
     const signature = req.headers['stripe-signature'];
-
     event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
   } catch (error) {
     console.error('stripe webhook signature error:', error.message);
@@ -196,12 +180,7 @@ module.exports = async function handler(req, res) {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object;
-
-        const email =
-          session.customer_details?.email ||
-          session.customer_email ||
-          null;
-
+        const email = session.customer_details?.email || session.customer_email || null;
         const plan = getPlanFromMetadata(session.metadata?.plan);
 
         if (email && plan) {
@@ -258,24 +237,8 @@ module.exports = async function handler(req, res) {
         const subscriptionId = subscription.id || '';
         const priceId = subscription.items?.data?.[0]?.price?.id || null;
         const plan = getPlanFromPriceId(priceId) || getPlanFromMetadata(subscription.metadata?.plan);
-        const status = subscription.status || (event.type === 'customer.subscription.deleted' ? 'canceled' : 'inactive');
-
-        let ref = await getUserRefByStripeIds({ customerId, subscriptionId });
-
-        if (!ref && customerId) {
-          const customer = await stripe.customers.retrieve(customerId);
-          const email = !customer.deleted ? customer.email : null;
-          if (email && plan) {
-            await upsertAccessByEmail({
-              email,
-              plan,
-              customerId,
-              subscriptionId,
-              subscriptionStatus: status,
-            });
-            break;
-          }
-        }
+        const status = subscription.status || (event.type === 'customer.subscription.deleted' ? 'canceled' : 'active');
+        const ref = await getUserRefByStripeIds({ customerId, subscriptionId });
 
         if (ref) {
           await updateAccessByRef(ref, {
@@ -295,6 +258,6 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ received: true });
   } catch (error) {
     console.error('stripe webhook handler error:', error);
-    return res.status(500).json({ error: error?.message || 'Webhook handler failed.' });
+    return res.status(500).send('Webhook handler failed');
   }
-};
+}

@@ -1,4 +1,4 @@
-const Stripe = require('stripe');
+import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -20,7 +20,7 @@ function normalizePlanInput(plan) {
   return null;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
@@ -49,7 +49,7 @@ module.exports = async function handler(req, res) {
           quantity: 1,
         },
       ],
-      return_url: `${APP_URL}/subscriptions.html?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${APP_URL}/subscriptions?session_id={CHECKOUT_SESSION_ID}`,
       redirect_on_completion: 'if_required',
       allow_promotion_codes: true,
       billing_address_collection: 'auto',
@@ -75,4 +75,4 @@ module.exports = async function handler(req, res) {
       error: error?.message || 'Failed to create checkout session.',
     });
   }
-};
+}
