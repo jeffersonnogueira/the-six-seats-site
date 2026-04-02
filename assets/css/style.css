@@ -1035,3 +1035,38 @@ h3{ font-size: 18px; }
     border-radius: 20px;
   }
 }
+
+/* === Acknowledgment === */
+.footer-disclaimer {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.footer-disclaimer a {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-disclaimer a:hover {
+  text-decoration: underline;
+}
+
+.subscription-note {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.subscription-note a {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.subscription-note a:hover {
+  text-decoration: underline;
+}
